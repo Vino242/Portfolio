@@ -1,0 +1,952 @@
+/* ============================================
+   FONTS
+   ============================================ */
+
+@font-face {
+    font-family: "ABCProphet";
+    src: url("assets/font/ABCProphetVariable-Trial.ttf") format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Prophet-Medium";
+    src: url("https://db.onlinewebfonts.com/t/33be5a69beaf2663834a76d643ad50ec.eot");
+    src: url("https://db.onlinewebfonts.com/t/33be5a69beaf2663834a76d643ad50ec.eot?#iefix") format("embedded-opentype"),
+         url("https://db.onlinewebfonts.com/t/33be5a69beaf2663834a76d643ad50ec.woff2") format("woff2"),
+         url("https://db.onlinewebfonts.com/t/33be5a69beaf2663834a76d643ad50ec.woff") format("woff"),
+         url("https://db.onlinewebfonts.com/t/33be5a69beaf2663834a76d643ad50ec.ttf") format("truetype"),
+         url("https://db.onlinewebfonts.com/t/33be5a69beaf2663834a76d643ad50ec.svg#Prophet-Medium") format("svg");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* ============================================
+   RESET
+   ============================================ */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================
+   VARIABLES
+   ============================================ */
+
+:root {
+    --bg:      #eeedeb;
+    --dark:    #2a2a2a;
+    --mid:     #838383;
+    --yellow:  #ffff00;
+    --hover-overlay: rgba(255, 255, 0, 0.7);
+}
+
+/* ============================================
+   BASE
+   ============================================ */
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--dark);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12.6pt;
+    font-weight: normal;
+    line-height: 1.15;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    display: block;
+}
+
+
+/* ============================================
+   TITLE — fixed overlay, top left
+   ============================================ */
+
+.c-title {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 7000;
+    padding: 18px 20px;
+    line-height: 0.9;
+    pointer-events: none;
+}
+
+.c-title__text {
+    font-family: 'ABCProphet', 'Prophet-Medium', 'Bebas Neue', 'Arial Black', Arial, sans-serif;
+    font-size: clamp(2.2rem, 6vw, 5.5rem);
+    font-weight: normal;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    line-height: 0.9;
+}
+
+/* Projekttitel im Overlay — gelb */
+.c-overlay .c-title .c-title__text {
+    color: var(--yellow);
+}
+
+
+/* ============================================
+   LANGUAGE NAV — fixed, top right
+   ============================================ */
+
+.c-lang-nav {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    display: flex;
+    gap: 6px;
+    z-index: 9500;
+}
+
+.c-lang-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 18px;
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--dark);
+    border: 1px solid rgba(42, 42, 42, 0.18);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+}
+
+.c-lang-btn:hover {
+    background: var(--yellow);
+    transform: scale(1.06);
+    opacity: 1;
+}
+
+/* ============================================
+   SOCIAL NAV — fixed, bottom right
+   ============================================ */
+
+.c-social-nav {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 9500;
+}
+
+.c-social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 18px;
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--dark);
+    border: 1px solid rgba(42, 42, 42, 0.18);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+}
+
+.c-social-btn:hover {
+    background: var(--yellow);
+    transform: scale(1.06);
+    opacity: 1;
+}
+
+/* ============================================
+   RIGHT MENU (legacy — kept for compatibility)
+   ============================================ */
+
+/* ============================================
+   FILTER NAVIGATION — fixed, bottom center
+   ============================================ */
+
+.c-filter-nav {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 6000;
+    flex-wrap: nowrap;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.c-filter-nav__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--yellow);
+    color: var(--dark);
+    border-radius: 999px;
+    padding: 14px 36px;
+    font-family: 'ABCProphet', 'Prophet-Medium', 'Bebas Neue', 'Arial Black', Arial, sans-serif;
+    font-size: clamp(1.05rem, 1.65vw, 1.65rem);
+    font-weight: normal;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    transition: background 0.2s ease, transform 0.15s ease;
+    white-space: nowrap;
+}
+
+.c-filter-nav.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(12px);
+}
+
+.c-filter-nav__pill:hover {
+    background: var(--bg);
+    transform: scale(1.04);
+}
+
+
+/* ============================================
+   GRID ROW LAYOUT
+   Two variants:
+   .c-grid-row--smalls-left  → [S][S] | [BIG]
+   .c-grid-row--smalls-right → [BIG]  | [S][S]
+   ============================================ */
+
+.c-grid-main {
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.c-grid-row {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+
+/* 4 smalls side — always 50% wide, 2×2 flex grid */
+.c-grid-row__smalls {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}
+
+/* big side — 50% wide, fills height of smalls */
+.c-grid-row__big {
+    width: 50%;
+    flex-shrink: 0;
+    position: relative;
+}
+
+/* Each small cell: 50% of its container = 25% total */
+.c-grid-cell {
+    width: 50%;
+    flex-shrink: 0;
+}
+
+/* Full-width row — 4 smalls à 25% ohne Big */
+.c-grid-row--full .c-grid-row__smalls {
+    width: 100%;
+}
+.c-grid-row--full .c-grid-cell {
+    width: 25%;
+}
+
+/* Big cell fills its container entirely */
+.c-grid-cell--big {
+    position: absolute;
+    inset: 0;
+}
+
+.c-grid-cell--big .c-post {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: unset; /* Container bestimmt die Größe */
+}
+
+.c-grid-cell--big .c-post--overlay .c-post__media {
+    flex: 1;
+    height: 100%;
+}
+
+/* Big card title — fills the wider card */
+.c-grid-cell--big .c-post__title h4 {
+    font-size: clamp(1.8rem, 5vw, 5rem);
+    line-height: 1.0;
+}
+
+/* Congressus caption bar — same absolute height as small caption cards */
+.c-grid-cell--big .c-post--caption .c-post__media {
+    flex: 0 0 84%;
+}
+
+
+/* ============================================
+   POST CARD — Basisstruktur
+   Das Quadrat wird immer durch .c-post gehalten.
+   Zwei Varianten:
+   .c-post--overlay  → Bild füllt alles, Text drüber
+   .c-post--caption  → Bild oben (~70%), weißes Textfeld unten
+   ============================================ */
+
+.c-post {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg);
+}
+
+/* Lazy loading states */
+img.js-lazy__image {
+    opacity: 0;
+}
+
+img.js-lazy__loaded {
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+/* Image fills its media container */
+.c-post__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%);
+    transition: transform 0.5s ease, filter 0.4s ease;
+}
+
+.c-post:hover .c-post__media img {
+    transform: scale(1.04);
+    filter: grayscale(0%);
+}
+
+
+/* ============================================
+   VARIANTE 1 — OVERLAY
+   Bild füllt das gesamte Quadrat, Titel drüber
+   ============================================ */
+
+.c-post--overlay .c-post__media {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.c-post--overlay .c-post__title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 10px 12px;
+    z-index: 4;
+    pointer-events: none;
+    background: transparent;
+}
+
+.c-post--overlay .c-post__title h4 {
+    font-family: 'ABCProphet', 'Prophet-Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: clamp(1rem, 2.2vw, 2.2rem);
+    font-weight: normal;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin: 0;
+    line-height: 1.1;
+}
+
+.c-post--overlay .c-post__title .c-post__price {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 300;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.c-post--overlay:hover .c-post__title .c-post__price {
+    color: var(--dark);
+}
+
+
+/* ============================================
+   VARIANTE 2 — CAPTION
+   Bild oben (~68%), weißes Textfeld unten (~32%)
+   Alles bleibt im Quadrat
+   ============================================ */
+
+.c-post--caption .c-post__media {
+    flex: 0 0 68%;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.c-post--caption .c-post__title {
+    flex: 1;
+    min-height: 0;
+    background: var(--bg);
+    padding: 8px 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Text oben */
+    align-items: flex-start;     /* Text links */
+    z-index: 4;
+    position: relative;
+}
+
+.c-post--caption .c-post__title h4 {
+    font-family: 'ABCProphet', 'Prophet-Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: clamp(1rem, 2.2vw, 2.2rem);
+    font-weight: normal;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin: 0;
+    line-height: 1.1;
+}
+
+.c-post--caption .c-post__title .c-post__price {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: var(--mid);
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+}
+
+
+/* ============================================
+   VARIANTE 3 — PLACEHOLDER
+   Gelber Kasten ohne Bild
+   ============================================ */
+
+.c-post--placeholder {
+    background: var(--bg);
+    cursor: default;
+}
+
+.c-post--placeholder:hover .c-post__backlayer {
+    opacity: 0; /* kein Hover-Effekt auf Platzhaltern */
+}
+
+
+/* ============================================
+   YELLOW HOVER OVERLAY — ganzes Quadrat
+   Backlayer sitzt direkt in .c-post, nicht in .c-post__media
+   ============================================ */
+
+.c-post__backlayer {
+    position: absolute;
+    inset: 0;
+    background: var(--hover-overlay);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.c-post:hover .c-post__backlayer {
+    opacity: 0;
+}
+
+
+/* ============================================
+   BOTTOM BAR — fixed overlay, bottom
+   ============================================ */
+
+.c-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5000;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.c-bottom-bar__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 20px 20px;
+    pointer-events: all;
+}
+
+.c-bottom-bar__left,
+.c-bottom-bar__right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.c-bottom-bar__left span,
+.c-bottom-bar__right span {
+    font-size: 0.55rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dark);
+    opacity: 0.5;
+}
+
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.c-footer {
+    padding: 48px 20px 32px;
+    border-top: 1px solid rgba(42, 42, 42, 0.12);
+}
+
+.c-footer__inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.c-footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.c-footer__col strong {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-bottom: 4px;
+    display: block;
+}
+
+.c-footer__col p,
+.c-footer__col a {
+    font-size: 0.78rem;
+    color: var(--mid);
+    line-height: 1.7;
+    transition: color 0.2s ease;
+}
+
+.c-footer__col a:hover {
+    color: var(--dark);
+}
+
+.c-footer__bottom {
+    text-align: center;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+}
+
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* ============================================
+   OVERLAY — Unterseiten
+   ============================================ */
+
+.c-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: var(--bg);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+.c-overlay::-webkit-scrollbar { display: none; }
+
+.c-overlay.is-visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Projekt-Titel (z.B. Athen) — fixed top-left, bleibt stehen */
+.c-overlay .c-title {
+    z-index: 1;
+}
+
+.c-overlay__close {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    background: var(--yellow);
+    color: var(--dark);
+    border: none;
+    border-radius: 999px;
+    padding: 14px 36px;
+    font-family: 'ABCProphet', 'Prophet-Medium', 'Bebas Neue', 'Arial Black', Arial, sans-serif;
+    font-size: clamp(1.05rem, 1.65vw, 1.65rem);
+    font-weight: normal;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+    white-space: nowrap;
+}
+
+.c-overlay__close:hover {
+    background: var(--bg);
+    transform: translateX(-50%) scale(1.04);
+}
+
+.c-single {
+    padding: calc(18px + clamp(2.2rem, 6vw, 5.5rem) * 0.9 + 24px) 20px 160px;
+}
+
+.c-single__name {
+    font-family: 'ABCProphet', 'Prophet-Medium', 'Bebas Neue', 'Arial Black', Arial, sans-serif;
+    font-size: clamp(2.2rem, 6vw, 5.5rem);
+    font-weight: normal;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--dark);
+    line-height: 0.9;
+    position: relative;
+    z-index: 2;
+    margin-bottom: calc(clamp(2.2rem, 6vw, 5.5rem) * 0.9 + 28px);
+}
+
+.c-gallery {
+    columns: 2;
+    column-gap: 4px;
+}
+
+.c-gallery figure {
+    break-inside: avoid;
+    margin: 0 0 4px;
+}
+
+.c-gallery figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .c-gallery { columns: 1; }
+
+    /* Overlay-Titel kleiner */
+    .c-single__name {
+        font-size: clamp(1.6rem, 8vw, 3rem);
+    }
+
+    /* Overlay-Padding kompakter */
+    .c-single {
+        padding-top: 80px;
+        padding-bottom: 100px;
+    }
+    .c-single--grid {
+        padding-top: 80px;
+        padding-bottom: 100px;
+    }
+}
+
+
+/* ============================================
+   IMPRESSUM — Textlayout
+   ============================================ */
+
+.c-impressum {
+    max-width: 680px;
+    color: var(--dark);
+}
+
+.c-impressum h2 {
+    font-family: 'ABCProphet', 'Bebas Neue', Arial, sans-serif;
+    font-size: clamp(2.2rem, 6vw, 5.5rem);
+    font-weight: normal;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--dark);
+    line-height: 0.9;
+    margin-bottom: 2rem;
+    display: none; /* Titel kommt als fixed c-title */
+}
+
+.c-impressum h3 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin: 2rem 0 0.5rem;
+}
+
+.c-impressum p {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--dark);
+}
+
+.c-impressum a {
+    color: var(--dark);
+    text-decoration: underline;
+}
+
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 900px) {
+    .c-grid-row {
+        flex-wrap: wrap;
+    }
+    .c-grid-row__smalls,
+    .c-grid-row__big {
+        width: 100%;
+    }
+    .c-grid-row__big {
+        aspect-ratio: 1 / 1;
+    }
+    .c-footer__inner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .c-title__text {
+        font-size: clamp(1.8rem, 5vw, 3rem);
+    }
+
+    /* Projekte-Grid: 4 → 2 Spalten */
+    .c-proj-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Karten-Titel skalieren mit größeren Karten (jetzt 50vw statt 25vw) */
+    .c-post--overlay .c-post__title h4,
+    .c-post--caption .c-post__title h4 {
+        font-size: clamp(1rem, 3vw, 2.2rem);
+    }
+    .c-grid-cell--big .c-post__title h4 {
+        font-size: clamp(2rem, 7vw, 5rem);
+    }
+
+    /* Projekte-Karten-Titel */
+    .c-proj-card__title h4 {
+        font-size: clamp(1rem, 3vw, 2.2rem);
+    }
+}
+
+/* ============================================
+   SHOP — Coming Soon
+   ============================================ */
+
+.c-shop-soon {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    pointer-events: none;
+}
+
+.c-shop-soon__label {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 1.2rem;
+}
+
+.c-shop-soon__headline {
+    font-family: 'ABCProphet', 'Prophet-Medium', 'Bebas Neue', Arial, sans-serif;
+    font-size: clamp(5rem, 18vw, 18rem);
+    font-weight: normal;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--dark);
+    line-height: 0.88;
+    margin: 0;
+}
+
+
+/* ============================================
+   PROJEKTE OVERLAY — Grid
+   ============================================ */
+
+.c-single--grid {
+    padding: calc(18px + clamp(2.2rem, 6vw, 5.5rem) * 0.9 + 24px) 0 160px;
+}
+
+.c-proj-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+}
+
+.c-proj-card {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.c-proj-card__media {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.c-proj-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.c-proj-card:hover .c-proj-card__media img {
+    transform: scale(1.04);
+}
+
+.c-proj-card__title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 10px 12px;
+    background: transparent;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.c-proj-card__title h4 {
+    font-family: 'ABCProphet', 'Prophet-Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: clamp(1rem, 2.2vw, 2.2rem);
+    font-weight: normal;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin: 0;
+    line-height: 1.1;
+}
+
+
+@media (max-width: 500px) {
+    /* Name-Titel oben links */
+    .c-title__text {
+        font-size: clamp(1.2rem, 5vw, 2rem);
+        letter-spacing: 0.01em;
+    }
+
+    /* Footer 2-spaltig */
+    .c-footer__inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    /* Bottom-Bar auf kleinen Screens ausblenden */
+    .c-bottom-bar {
+        display: none;
+    }
+
+    /* Filter-Nav: kleinere Pills damit alle 3 passen */
+    .c-filter-nav {
+        gap: 6px;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
+    .c-filter-nav__pill {
+        padding: 10px 16px;
+        font-size: clamp(0.7rem, 3vw, 0.95rem);
+    }
+    .c-filter-nav.is-hidden {
+        transform: translateX(-50%) translateY(12px);
+    }
+
+    /* Social-Nav etwas weiter unten (kein Bottom-Bar mehr) */
+    .c-social-nav {
+        bottom: 50px;
+    }
+
+    /* Karten-Titel auf sehr kleinen Screens */
+    .c-post--overlay .c-post__title h4,
+    .c-post--caption .c-post__title h4 {
+        font-size: clamp(0.85rem, 4.5vw, 1.6rem);
+    }
+    .c-grid-cell--big .c-post__title h4 {
+        font-size: clamp(1.6rem, 9vw, 4rem);
+    }
+    .c-proj-card__title h4 {
+        font-size: clamp(0.85rem, 4.5vw, 1.6rem);
+    }
+
+    /* Overlay-Close-Button kleiner */
+    .c-overlay__close {
+        padding: 10px 28px;
+        font-size: clamp(0.8rem, 3.5vw, 1rem);
+    }
+}
