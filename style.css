@@ -350,13 +350,15 @@ img.js-lazy__loaded {
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: grayscale(100%);
-    transition: transform 0.5s ease, filter 0.4s ease;
+    filter: grayscale(100%) brightness(1.3);
+    opacity: 0.6;
+    transition: transform 0.5s ease, filter 0.4s ease, opacity 0.4s ease;
 }
 
 .c-post:hover .c-post__media img {
     transform: scale(1.04);
-    filter: grayscale(0%);
+    filter: grayscale(0%) brightness(1);
+    opacity: 1;
 }
 
 
@@ -769,10 +771,6 @@ img.js-lazy__loaded {
         font-size: clamp(1.8rem, 5vw, 3rem);
     }
 
-    /* Projekte-Grid: 4 → 2 Spalten */
-    .c-proj-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
 
     /* Karten-Titel skalieren mit größeren Karten (jetzt 50vw statt 25vw) */
     .c-post--overlay .c-post__title h4,
@@ -836,7 +834,7 @@ img.js-lazy__loaded {
 
 .c-proj-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     width: 100%;
 }
 
@@ -894,10 +892,13 @@ img.js-lazy__loaded {
 
 
 @media (max-width: 500px) {
-    /* Name-Titel oben links */
+    /* Name-Titel oben links — größer + Umbruch nach VINCENT */
     .c-title__text {
-        font-size: clamp(1.2rem, 5vw, 2rem);
+        font-size: clamp(2rem, 10vw, 3.5rem);
         letter-spacing: 0.01em;
+    }
+    .c-title__first {
+        display: block;
     }
 
     /* Footer 2-spaltig */
@@ -942,6 +943,11 @@ img.js-lazy__loaded {
     }
     .c-proj-card__title h4 {
         font-size: clamp(0.85rem, 4.5vw, 1.6rem);
+    }
+
+    /* Projekte-Grid: 1 Spalte auf Mobile */
+    .c-proj-grid {
+        grid-template-columns: 1fr;
     }
 
     /* Overlay-Close-Button kleiner */
