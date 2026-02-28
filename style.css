@@ -933,9 +933,10 @@ img.js-lazy__loaded {
         display: none;
     }
 
-    /* Lang-Button etwas weiter unten */
+    /* Lang-Button mittig rechts */
     .c-lang-nav {
-        top: 28px;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     /* Karten-Titel auf sehr kleinen Screens */
