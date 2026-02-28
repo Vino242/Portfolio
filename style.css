@@ -928,9 +928,14 @@ img.js-lazy__loaded {
         transform: translateX(-50%) translateY(12px);
     }
 
-    /* Social-Nav etwas weiter unten (kein Bottom-Bar mehr) */
+    /* Social-Nav auf Mobile ausblenden */
     .c-social-nav {
-        bottom: 50px;
+        display: none;
+    }
+
+    /* Lang-Button etwas weiter unten */
+    .c-lang-nav {
+        top: 28px;
     }
 
     /* Karten-Titel auf sehr kleinen Screens */
