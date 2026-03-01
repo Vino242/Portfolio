@@ -2,6 +2,120 @@
    FONTS
    ============================================ */
 
+/* Soehne Font Family */
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-Extraleicht.otf") format("opentype");
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-ExtraleichtKursiv.otf") format("opentype");
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-Leicht.otf") format("opentype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-LeichtKursiv.otf") format("opentype");
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-Buch.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-BuchKursiv.otf") format("opentype");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-Kraftig.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-KraftigKursiv.otf") format("opentype");
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-Halbfett.otf") format("opentype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-HalbfettKursiv.otf") format("opentype");
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-Dreiviertelfett.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-DreiviertelfettKursiv.otf") format("opentype");
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-Fett.otf") format("opentype");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-FettKursiv.otf") format("opentype");
+    font-weight: 800;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-Extrafett.otf") format("opentype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Soehne";
+    src: url("assets/font/Sohne-ExtrafettKursiv.otf") format("opentype");
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
 @font-face {
     font-family: "ABCProphet";
     src: url("assets/font/ABCProphetVariable-Trial.ttf") format("truetype");
@@ -44,11 +158,16 @@
     --mid:     #838383;
     --yellow:  #ffff00;
     --hover-overlay: rgba(255, 255, 0, 0.7);
+    --red:     #ff2133;
 }
 
 /* ============================================
    BASE
    ============================================ */
+
+html {
+    scroll-behavior: smooth;
+}
 
 html, body {
     height: 100%;
@@ -86,7 +205,7 @@ img {
 
 
 /* ============================================
-   TITLE — fixed overlay, top left
+   TITLE — vertikal links
    ============================================ */
 
 .c-title {
@@ -94,24 +213,444 @@ img {
     top: 0;
     left: 0;
     z-index: 7000;
-    padding: 18px 20px;
+    padding: 28px 20px;
     line-height: 0.9;
     pointer-events: none;
 }
 
 .c-title__text {
-    font-family: 'ABCProphet', 'Prophet-Medium', 'Bebas Neue', 'Arial Black', Arial, sans-serif;
+    font-family: 'Soehne', 'Soehne', 'ABCProphet', 'Bebas Neue', Arial, sans-serif;
     font-size: clamp(2.2rem, 6vw, 5.5rem);
     font-weight: normal;
     letter-spacing: 0.03em;
     text-transform: uppercase;
-    color: var(--yellow);
+    color: var(--red);
     line-height: 0.9;
 }
 
-/* Projekttitel im Overlay — gelb */
+/* Titel — Grundzustand (klein, schwarz, oben links) */
+.c-title--vertical {
+    position: fixed;
+    top: 1.5rem;
+    left: 20px;
+    height: 50vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0;
+    transition: height 0.6s ease, fill 0.6s ease;
+}
+
+.c-title__svg {
+    height: 100%;
+    width: auto;
+    display: block;
+    transition: height 0.6s ease;
+}
+
+.c-title__svg text {
+    font-family: 'Soehne', 'Soehne', 'ABCProphet', 'Bebas Neue', Arial, sans-serif;
+    font-size: 72px;
+    fill: var(--dark);
+    transition: fill 0.6s ease;
+}
+
+/* Hero-State: groß + rot (Klasse wird per JS entfernt beim Scrollen) */
+.c-title--vertical.is-hero {
+    height: calc(100vh - 3rem);
+    top: 1.5rem;
+}
+
+.c-title--vertical.is-hero .c-title__svg text {
+    fill: var(--red);
+}
+
+/* Haupttitel ausblenden wenn Overlay offen */
+body.has-overlay .c-title--vertical {
+    display: none;
+}
+
+/* Projekttitel im Overlay — vertikal links */
+.c-overlay .c-title {
+    top: 20px;
+    left: 20px;
+    transform: none;
+    padding: 0;
+}
 .c-overlay .c-title .c-title__text {
-    color: var(--yellow);
+    color: var(--red);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    letter-spacing: 0.03em;
+}
+
+
+/* ============================================
+   ABOUT — Über Mich
+   ============================================ */
+
+.c-about {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 120px 40px 140px;
+}
+
+.c-about__heading {
+    font-family: 'Soehne', 'Soehne', 'ABCProphet', 'Bebas Neue', Arial, sans-serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: normal;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-bottom: 40px;
+}
+
+.c-about__text {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--dark);
+}
+
+
+/* ============================================
+   HERO — Fullscreen Slideshow
+   ============================================ */
+
+.c-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.c-hero__slides {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.c-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.c-hero__img.is-active {
+    opacity: 1;
+}
+
+/* ============================================
+   BADGE — oben rechts, rotierender Text
+   ============================================ */
+
+.c-badge {
+    cursor: pointer;
+    position: absolute;
+    z-index: 99;
+    width: 9rem;
+    height: 9rem;
+    right: 1rem;
+    top: 5rem;
+    transform: scale(1);
+    transition: transform 0.07s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-badge:hover {
+    transform: scale(1.05);
+}
+
+.c-badge svg {
+    width: 100%;
+    height: 100%;
+    animation: badgeRotate 12s linear infinite;
+}
+
+.c-badge svg text {
+    font-family: 'Soehne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 8.2px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    fill: white;
+}
+
+.c-badge__arrow {
+    position: absolute;
+    font-size: 1.6rem;
+    color: white;
+    pointer-events: none;
+}
+
+@keyframes badgeRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@media (min-width: 768px) {
+    .c-badge {
+        right: 2rem;
+    }
+}
+
+/* ============================================
+   SCROLL HINT — unten mittig
+   ============================================ */
+
+.c-scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: white;
+    text-decoration: none;
+    z-index: 10;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.c-scroll-hint:hover {
+    color: var(--red);
+}
+
+.c-scroll-hint span {
+    font-family: 'Soehne', 'Bebas Neue', Arial, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.c-scroll-hint__arrow {
+    font-size: 1.1rem;
+}
+
+
+/* ============================================
+   BADGE — rotierender Kreis-Button
+   ============================================ */
+
+.c-badge {
+    display: block;
+    width: 140px;
+    height: 140px;
+    position: relative;
+    margin: 0 auto 80px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.c-badge svg {
+    width: 100%;
+    height: 100%;
+    animation: badgeSpin 12s linear infinite;
+}
+
+.c-badge svg text {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 15.5px;
+    fill: var(--dark);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.c-badge__arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8rem;
+    color: var(--dark);
+    line-height: 1;
+    pointer-events: none;
+}
+
+.c-badge:hover svg {
+    animation-duration: 4s;
+}
+
+@keyframes badgeSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+/* ============================================
+   BILDERREIHE — horizontal scrollend
+   ============================================ */
+
+.c-imgrow {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 0 40px 120px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.c-imgrow::-webkit-scrollbar {
+    display: none;
+}
+
+.c-imgrow img {
+    height: 45vh;
+    width: auto;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+}
+
+
+/* ============================================
+   BURGER — oben rechts
+   ============================================ */
+
+.c-burger {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9600;
+    width: 32px;
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.c-burger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--red);
+    border-radius: 1px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.c-burger.is-open span {
+    background: white;
+}
+
+.c-burger.is-open span:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+}
+
+.c-burger.is-open span:nth-child(2) {
+    opacity: 0;
+}
+
+.c-burger.is-open span:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+}
+
+/* ============================================
+   SLIDE MENU — von rechts
+   ============================================ */
+
+.c-slide-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    background: var(--red);
+    z-index: 9500;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 40px;
+    box-sizing: border-box;
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+}
+
+.c-slide-menu.is-open {
+    transform: translateX(0);
+}
+
+.c-slide-menu__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.c-slide-menu__nav a {
+    font-family: 'Soehne', 'ABCProphet', 'Bebas Neue', Arial, sans-serif;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: normal;
+    text-transform: uppercase;
+    color: var(--bg);
+    text-decoration: none;
+    line-height: 1;
+    letter-spacing: 0.03em;
+    transition: opacity 0.2s ease;
+    word-break: break-word;
+}
+
+.c-slide-menu__nav a:hover {
+    opacity: 0.6;
+}
+
+/* Home-Link: nur sichtbar wenn Overlay offen */
+.c-slide-menu__home {
+    display: none;
+}
+
+body.has-overlay .c-slide-menu__home {
+    display: block;
+}
+
+.c-slide-menu__footer {
+    margin-top: auto;
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.c-slide-menu__footer .c-lang-btn {
+    background: var(--bg);
+    color: var(--red);
+    border: none;
+}
+
+.c-slide-menu__social {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: right;
+}
+
+.c-slide-menu__social a {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--bg);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.c-slide-menu__social a:hover {
+    opacity: 0.6;
 }
 
 
@@ -215,11 +754,11 @@ img {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: var(--yellow);
-    color: var(--dark);
+    background: var(--red);
+    color: white;
     border-radius: 999px;
     padding: 14px 36px;
-    font-family: 'ABCProphet', 'Prophet-Medium', 'Bebas Neue', 'Arial Black', Arial, sans-serif;
+    font-family: 'Soehne', 'Soehne', 'ABCProphet', 'Bebas Neue', Arial, sans-serif;
     font-size: clamp(1.05rem, 1.65vw, 1.65rem);
     font-weight: normal;
     letter-spacing: 0.03em;
@@ -251,69 +790,8 @@ img {
     width: 100%;
     padding: 0;
     box-sizing: border-box;
-}
-
-.c-grid-row {
-    display: flex;
-    align-items: stretch;
-    width: 100%;
-}
-
-/* 4 smalls side — always 50% wide, 2×2 flex grid */
-.c-grid-row__smalls {
-    width: 50%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-shrink: 0;
-}
-
-/* big side — 50% wide, fills height of smalls */
-.c-grid-row__big {
-    width: 50%;
-    flex-shrink: 0;
-    position: relative;
-}
-
-/* Each small cell: 50% of its container = 25% total */
-.c-grid-cell {
-    width: 50%;
-    flex-shrink: 0;
-}
-
-/* Full-width row — 4 smalls à 25% ohne Big */
-.c-grid-row--full .c-grid-row__smalls {
-    width: 100%;
-}
-.c-grid-row--full .c-grid-cell {
-    width: 25%;
-}
-
-/* Big cell fills its container entirely */
-.c-grid-cell--big {
-    position: absolute;
-    inset: 0;
-}
-
-.c-grid-cell--big .c-post {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: unset; /* Container bestimmt die Größe */
-}
-
-.c-grid-cell--big .c-post--overlay .c-post__media {
-    flex: 1;
-    height: 100%;
-}
-
-/* Big card title — fills the wider card */
-.c-grid-cell--big .c-post__title h4 {
-    font-size: clamp(1.8rem, 5vw, 5rem);
-    line-height: 1.0;
-}
-
-/* Congressus caption bar — same absolute height as small caption cards */
-.c-grid-cell--big .c-post--caption .c-post__media {
-    flex: 0 0 84%;
+    display: grid;
+    grid-template-columns: 1fr;
 }
 
 
@@ -387,7 +865,7 @@ img.js-lazy__loaded {
 }
 
 .c-post--overlay .c-post__title h4 {
-    font-family: 'ABCProphet', 'Prophet-Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Soehne', 'ABCProphet', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: clamp(1rem, 2.2vw, 2.2rem);
     font-weight: normal;
     letter-spacing: 0.04em;
@@ -437,7 +915,7 @@ img.js-lazy__loaded {
 }
 
 .c-post--caption .c-post__title h4 {
-    font-family: 'ABCProphet', 'Prophet-Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Soehne', 'ABCProphet', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: clamp(1rem, 2.2vw, 2.2rem);
     font-weight: normal;
     letter-spacing: 0.04em;
@@ -535,42 +1013,85 @@ img.js-lazy__loaded {
 
 
 /* ============================================
+   ABOUT
+   ============================================ */
+
+.c-about {
+    padding: 120px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.c-about__inner {
+    max-width: 640px;
+}
+
+.c-about__heading {
+    font-family: 'Soehne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 40px;
+}
+
+.c-about__text {
+    font-family: 'Soehne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--dark);
+    margin-bottom: 24px;
+}
+
+.c-about__text:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ============================================
    FOOTER
    ============================================ */
 
 .c-footer {
-    padding: 48px 20px 32px;
-    border-top: 1px solid rgba(42, 42, 42, 0.12);
+    font-family: 'Soehne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding: 60px 20px 40px;
+    border-top: 1px solid rgba(42, 42, 42, 0.1);
 }
 
 .c-footer__inner {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 48px;
 }
 
 .c-footer__col {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
 }
 
 .c-footer__col strong {
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-family: 'Soehne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--dark);
-    margin-bottom: 4px;
-    display: block;
+    margin-bottom: 6px;
 }
 
 .c-footer__col p,
 .c-footer__col a {
-    font-size: 0.78rem;
+    font-family: 'Soehne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 300;
     color: var(--mid);
-    line-height: 1.7;
+    line-height: 1.8;
+    text-decoration: none;
     transition: color 0.2s ease;
 }
 
@@ -580,8 +1101,10 @@ img.js-lazy__loaded {
 
 .c-footer__bottom {
     text-align: center;
+    font-family: 'Soehne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 0.6rem;
-    letter-spacing: 0.15em;
+    font-weight: 300;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--mid);
 }
@@ -624,53 +1147,18 @@ img.js-lazy__loaded {
 }
 
 .c-overlay__close {
-    position: fixed;
-    bottom: 28px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    background: var(--yellow);
-    color: var(--dark);
-    border: none;
-    border-radius: 999px;
-    padding: 14px 36px;
-    font-family: 'ABCProphet', 'Prophet-Medium', 'Bebas Neue', 'Arial Black', Arial, sans-serif;
-    font-size: clamp(1.05rem, 1.65vw, 1.65rem);
-    font-weight: normal;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.15s ease;
-    white-space: nowrap;
-}
-
-.c-overlay__close:hover {
-    background: var(--bg);
-    transform: translateX(-50%) scale(1.04);
+    display: none;
 }
 
 .c-single {
-    padding: calc(18px + clamp(2.2rem, 6vw, 5.5rem) * 0.9 + 24px) 20px 160px;
-}
-
-.c-single__name {
-    font-family: 'ABCProphet', 'Prophet-Medium', 'Bebas Neue', 'Arial Black', Arial, sans-serif;
-    font-size: clamp(2.2rem, 6vw, 5.5rem);
-    font-weight: normal;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: var(--dark);
-    line-height: 0.9;
-    position: relative;
-    z-index: 2;
-    margin-bottom: calc(clamp(2.2rem, 6vw, 5.5rem) * 0.9 + 28px);
+    padding: 80px 40px 160px 80px;
 }
 
 .c-gallery {
     columns: 2;
-    column-gap: 4px;
+    column-gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .c-gallery figure {
@@ -687,15 +1175,9 @@ img.js-lazy__loaded {
 @media (max-width: 600px) {
     .c-gallery { columns: 1; }
 
-    /* Overlay-Titel kleiner */
-    .c-single__name {
-        font-size: clamp(1.6rem, 8vw, 3rem);
-    }
-
     /* Overlay-Padding kompakter */
     .c-single {
-        padding-top: 80px;
-        padding-bottom: 100px;
+        padding: 80px 16px 100px 16px;
     }
     .c-single--grid {
         padding-top: 80px;
@@ -714,7 +1196,7 @@ img.js-lazy__loaded {
 }
 
 .c-impressum h2 {
-    font-family: 'ABCProphet', 'Bebas Neue', Arial, sans-serif;
+    font-family: 'Soehne', 'ABCProphet', 'Bebas Neue', Arial, sans-serif;
     font-size: clamp(2.2rem, 6vw, 5.5rem);
     font-weight: normal;
     letter-spacing: 0.03em;
@@ -754,35 +1236,16 @@ img.js-lazy__loaded {
    ============================================ */
 
 @media (max-width: 900px) {
-    .c-grid-row {
-        flex-wrap: wrap;
-    }
-    .c-grid-row__smalls,
-    .c-grid-row__big {
-        width: 100%;
-    }
-    .c-grid-row__big {
-        aspect-ratio: 1 / 1;
-    }
     .c-footer__inner {
         grid-template-columns: repeat(2, 1fr);
     }
     .c-title__text {
         font-size: clamp(1.8rem, 5vw, 3rem);
     }
-
-
-    /* Karten-Titel skalieren mit größeren Karten (jetzt 50vw statt 25vw) */
-    .c-post--overlay .c-post__title h4,
-    .c-post--caption .c-post__title h4 {
-        font-size: clamp(1rem, 3vw, 2.2rem);
+    .c-post--overlay .c-post__title h4 {
+        font-size: clamp(1rem, 4vw, 2.2rem);
     }
-    .c-grid-cell--big .c-post__title h4 {
-        font-size: clamp(2rem, 7vw, 5rem);
-    }
-
-    /* Projekte-Karten-Titel */
-    .c-proj-card__title h4 {
+    .c-proj-card__overlay h4 {
         font-size: clamp(1rem, 3vw, 2.2rem);
     }
 }
@@ -813,7 +1276,7 @@ img.js-lazy__loaded {
 }
 
 .c-shop-soon__headline {
-    font-family: 'ABCProphet', 'Prophet-Medium', 'Bebas Neue', Arial, sans-serif;
+    font-family: 'Soehne', 'ABCProphet', 'Bebas Neue', Arial, sans-serif;
     font-size: clamp(5rem, 18vw, 18rem);
     font-weight: normal;
     letter-spacing: 0.02em;
@@ -829,30 +1292,37 @@ img.js-lazy__loaded {
    ============================================ */
 
 .c-single--grid {
-    padding: calc(18px + clamp(2.2rem, 6vw, 5.5rem) * 0.9 + 24px) 0 160px;
+    padding: calc(18px + clamp(2.2rem, 6vw, 5.5rem) * 0.9 + 24px) 40px 160px;
 }
 
 .c-proj-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    columns: 2;
+    column-gap: 32px;
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .c-proj-card {
-    aspect-ratio: 1 / 1;
-    display: flex;
-    flex-direction: column;
+    break-inside: avoid;
+    margin-bottom: 32px;
     position: relative;
-    overflow: hidden;
-    background: var(--bg);
+    overflow: visible;
+    background: none;
     cursor: pointer;
     text-decoration: none;
+    display: block;
 }
 
+.c-proj-card--portrait { aspect-ratio: 4 / 5; }
+.c-proj-card--square   { aspect-ratio: 1 / 1; }
+.c-proj-card--land     { aspect-ratio: 5 / 4; }
+
 .c-proj-card__media {
-    flex: 1;
-    min-height: 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
+    border-radius: 2px;
 }
 
 .c-proj-card__media img {
@@ -860,34 +1330,68 @@ img.js-lazy__loaded {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.5s ease;
+    transition: opacity 0.6s ease;
 }
 
 .c-proj-card:hover .c-proj-card__media img {
-    transform: scale(1.04);
+    opacity: 0;
 }
 
-.c-proj-card__title {
+/* Farbfeld-Overlay mit Titel — weiche Kanten via blur */
+.c-proj-card__overlay {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 8px 10px 12px;
-    background: transparent;
-    z-index: 4;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.6s ease;
     pointer-events: none;
+    z-index: 2;
 }
 
-.c-proj-card__title h4 {
-    font-family: 'ABCProphet', 'Prophet-Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: clamp(1rem, 2.2vw, 2.2rem);
+.c-proj-card__overlay::before {
+    content: '';
+    position: absolute;
+    inset: 50px;
+    background: var(--card-color, transparent);
+    filter: blur(40px);
+    z-index: -1;
+}
+
+.c-proj-card:hover .c-proj-card__overlay {
+    opacity: 1;
+}
+
+.c-proj-card__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.c-proj-card__name,
+.c-proj-card__cat,
+.c-proj-card__year {
+    font-family: 'Soehne', 'Bebas Neue', Arial, sans-serif;
+    font-size: clamp(0.9rem, 2vw, 1.4rem);
     font-weight: normal;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--dark);
-    margin: 0;
-    line-height: 1.1;
+    line-height: 1.2;
+}
+
+.c-proj-card__sep {
+    font-size: clamp(0.9rem, 2vw, 1.4rem);
+    color: var(--dark);
+    line-height: 1;
+    margin: 2px 0;
 }
 
 
@@ -901,10 +1405,10 @@ img.js-lazy__loaded {
         display: block;
     }
 
-    /* Footer 2-spaltig */
+    /* Footer stacked */
     .c-footer__inner {
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
+        flex-direction: column;
+        gap: 24px;
     }
 
     /* Bottom-Bar auf kleinen Screens ausblenden */
@@ -947,13 +1451,13 @@ img.js-lazy__loaded {
     .c-grid-cell--big .c-post__title h4 {
         font-size: clamp(1.6rem, 9vw, 4rem);
     }
-    .c-proj-card__title h4 {
+    .c-proj-card__overlay h4 {
         font-size: clamp(0.85rem, 4.5vw, 1.6rem);
     }
 
     /* Projekte-Grid: 1 Spalte auf Mobile */
     .c-proj-grid {
-        grid-template-columns: 1fr;
+        columns: 1;
     }
 
     /* Overlay-Close-Button kleiner */

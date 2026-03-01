@@ -10,171 +10,89 @@
 </head>
 <body>
 
-    <div class="c-lang-nav">
-        <button class="c-lang-btn" id="lang-toggle">EN</button>
+    <!-- Vertikaler Name links (SVG für exakte Höhe) -->
+    <div class="c-title c-title--vertical is-hero" id="main-title">
+        <svg class="c-title__svg" viewBox="0 0 100 1000">
+            <text x="50" y="772" text-anchor="middle" dominant-baseline="central"
+                  transform="rotate(-90, 50, 772)" textLength="436" lengthAdjust="spacing"
+                  font-weight="600">VINCENT.</text>
+            <text x="50" y="255" text-anchor="middle" dominant-baseline="central"
+                  transform="rotate(-90, 50, 255)" textLength="490" lengthAdjust="spacing"
+                  font-weight="normal">NOEL MARK</text>
+        </svg>
     </div>
 
-    <div class="c-title">
-        <h1 class="c-title__text"><span class="c-title__first">VINCENT</span> <span class="c-title__last">NOEL MARK</span></h1>
+    <!-- Burger-Menü oben rechts -->
+    <button class="c-burger" id="burger-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Slide-Menü -->
+    <div class="c-slide-menu" id="slide-menu">
+        <nav class="c-slide-menu__nav">
+            <a href="#" class="c-slide-menu__home" id="nav-home"><span data-i18n="nav.home">Home</span></a>
+            <a href="#" data-overlay="projekte"><span data-i18n="nav.projekte">Projekte</span></a>
+            <a href="#" data-overlay="shop"><span data-i18n="nav.shop">Shop</span></a>
+            <a href="mailto:vincent.mark@gmx.de"><span data-i18n="nav.kontakt">Kontakt</span></a>
+        </nav>
+        <div class="c-slide-menu__footer">
+            <button class="c-lang-btn" id="lang-toggle">EN</button>
+            <div class="c-slide-menu__social">
+                <a href="https://www.instagram.com/vincentnoelmark?igsh=dDgzZGZoaTJmdDUw&utm_source=qr" target="_blank">Instagram</a>
+                <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+            </div>
+        </div>
     </div>
 
-    <nav class="c-filter-nav">
-        <a class="c-filter-nav__pill" href="#" data-overlay="projekte">○ &nbsp;<span data-i18n="nav.projekte">projekte</span></a>
-        <a class="c-filter-nav__pill" href="#" data-overlay="shop">○ &nbsp;<span data-i18n="nav.shop">shop</span></a>
-        <a class="c-filter-nav__pill" href="mailto:vincent.mark@gmx.de">○ &nbsp;<span data-i18n="nav.kontakt">kontakt</span></a>
-    </nav>
-
-    <main class="c-grid-main" id="projekte">
-
-        <!-- ═══════════════════════════════════════════════
-             ROW A — 4 Smalls links · 1 Big rechts
-             ═══════════════════════════════════════════════ -->
-        <div class="c-grid-row">
-            <div class="c-grid-row__smalls">
-
-                <!-- Pos 1: Athen — caption -->
-                <div class="c-grid-cell">
-                    <a href="#" class="c-post c-post--caption" data-overlay="athen">
-                        <div class="c-post__backlayer"></div>
-                        <div class="c-post__media">
-                            <img class="js-lazy__image"
-                                 data-src="assets/Athen/2044d784-6d2c-4d00-8caa-c116e89c91b7_rw_3840.jpg"
-                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                 alt="Athen">
-                        </div>
-                        <div class="c-post__title"><h4>Athen</h4></div>
-                    </a>
-                </div>
-
-                <!-- Pos 2: Illustrationen -->
-                <div class="c-grid-cell">
-                    <a href="#" class="c-post c-post--overlay" data-overlay="illustrationen">
-                        <div class="c-post__backlayer"></div>
-                        <div class="c-post__media">
-                            <img class="js-lazy__image"
-                                 data-src="assets/Illustrationen/Plakat1.jpg"
-                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                 alt="Illustrationen">
-                            <div class="c-post__title"><h4>Illustrationen</h4></div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Pos 3: Odenwald -->
-                <div class="c-grid-cell">
-                    <a href="#" class="c-post c-post--overlay" data-overlay="odenwald">
-                        <div class="c-post__backlayer"></div>
-                        <div class="c-post__media">
-                            <img class="js-lazy__image"
-                                 data-src="assets/Odenwald/Bild1.jpeg"
-                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                 alt="Odenwald">
-                            <div class="c-post__title"><h4>Odenwald</h4></div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Pos 4: Darmstadt Sport -->
-                <div class="c-grid-cell">
-                    <a href="#" class="c-post c-post--caption" data-overlay="darmstadt-sport">
-                        <div class="c-post__backlayer"></div>
-                        <div class="c-post__media">
-                            <img class="js-lazy__image"
-                                 data-src="assets/darmstadt-sport/4633f802-8c02-49f3-a788-155add0a04e5_rw_1920.jpg"
-                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                 alt="Darmstadt Sport">
-                        </div>
-                        <div class="c-post__title"><h4>Darmstadt<br>Sport</h4></div>
-                    </a>
-                </div>
-
-            </div>
-
-            <!-- Big rechts: Congressus -->
-            <div class="c-grid-row__big">
-                <div class="c-grid-cell--big">
-                    <a href="#" class="c-post c-post--caption" data-overlay="congressus"
-                       data-slideshow="assets/Congressus/_DSF0064.jpg|assets/Congressus/_DSF0076.jpg|assets/Congressus/_DSF9233.jpg|assets/Congressus/_DSF9285.jpg|assets/Congressus/_DSF9343.jpg|assets/Congressus/_DSF9351.jpg|assets/Congressus/_DSF9363.jpg|assets/Congressus/_DSF9370.jpg|assets/Congressus/_DSF9397.jpg|assets/Congressus/_DSF9428_1.jpg|assets/Congressus/_DSF9673.jpg|assets/Congressus/_DSF9709.jpg|assets/Congressus/_DSF9716.jpg|assets/Congressus/_DSF9846.jpg">
-                        <div class="c-post__backlayer"></div>
-                        <div class="c-post__media">
-                            <img class="js-lazy__image"
-                                 data-src="assets/Congressus/_DSF0064.jpg"
-                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                 alt="Congressus">
-                        </div>
-                        <div class="c-post__title"><h4>Congressus</h4></div>
-                    </a>
-                </div>
-            </div>
+    <!-- Hero — Fullscreen Slideshow -->
+    <main class="c-hero">
+        <div class="c-hero__slides" id="hero-slides">
+            <img class="c-hero__img is-active" src="assets/Montepulciano/Bildmonte1.jpeg" alt="" style="object-position: left top;">
+            <img class="c-hero__img" src="assets/Montepulciano/Bildmonte2.jpeg" alt="">
+            <img class="c-hero__img" src="assets/Athen/5e71e926-4ac4-4983-847e-227f2386c779_rw_1920.jpg" alt="">
+            <img class="c-hero__img" src="assets/Congressus/_DSF9673.jpg" alt="">
+            <img class="c-hero__img" src="assets/Montepulciano/Bildmonte3.jpeg" alt="" style="object-position: left bottom;">
+            <img class="c-hero__img" src="assets/Odenwald/_DSF9470.jpeg" alt="">
+            <img class="c-hero__img" src="assets/darmstadt-sport/f299d750-1423-4cf2-bb0b-bf0af151eba2_rw_3840.JPG" alt="">
+            <img class="c-hero__img" src="assets/Athen/2044d784-6d2c-4d00-8caa-c116e89c91b7_rw_3840.jpg" alt="">
         </div>
-
-
-        <!-- ═══════════════════════════════════════════════
-             ROW B — 1 Big links · 4 Smalls rechts
-             2 echte Bilder + 2 gelbe Platzhalter
-             ═══════════════════════════════════════════════ -->
-        <div class="c-grid-row">
-
-            <!-- Big links -->
-            <div class="c-grid-row__big">
-                <div class="c-grid-cell--big">
-                    <a href="#" class="c-post c-post--overlay" data-overlay="kunst">
-                        <div class="c-post__backlayer"></div>
-                        <div class="c-post__media">
-                            <img class="js-lazy__image"
-                                 data-src="assets/Kunst/IMG_5290.JPG"
-                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                 alt="Kunst">
-                            <div class="c-post__title"><h4>Kunst</h4></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="c-grid-row__smalls">
-
-                <div class="c-grid-cell">
-                    <a href="#" class="c-post c-post--overlay" data-overlay="karte">
-                        <div class="c-post__backlayer"></div>
-                        <div class="c-post__media">
-                            <img class="js-lazy__image"
-                                 data-src="assets/Karte/karte-preview.png"
-                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                 alt="Karte">
-                            <div class="c-post__title"><h4>Karte</h4></div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Platzhalter oben rechts -->
-                <div class="c-grid-cell">
-                    <div class="c-post c-post--placeholder"></div>
-                </div>
-
-                <!-- Platzhalter unten links -->
-                <div class="c-grid-cell">
-                    <div class="c-post c-post--placeholder"></div>
-                </div>
-
-                <!-- Montepulciano unten rechts -->
-                <div class="c-grid-cell">
-                    <a href="#" class="c-post c-post--caption" data-overlay="montepulciano">
-                        <div class="c-post__backlayer"></div>
-                        <div class="c-post__media">
-                            <img class="js-lazy__image"
-                                 data-src="assets/Montepulciano/Bildmonte2.jpeg"
-                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                 alt="Montepulciano">
-                        </div>
-                        <div class="c-post__title"><h4>Montepulciano</h4></div>
-                    </a>
-                </div>
-
-            </div>
-        </div>
-
+        <a href="#" class="c-badge" id="badge" data-overlay="projekte">
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <path id="badge-circle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
+                </defs>
+                <text>
+                    <textPath href="#badge-circle" startOffset="0%">Discover my latest Projects • Discover my latest Projects •</textPath>
+                </text>
+            </svg>
+            <span class="c-badge__arrow">→</span>
+        </a>
+        <a href="#content" class="c-scroll-hint">
+            <span>scroll down</span>
+            <span class="c-scroll-hint__arrow">v</span>
+        </a>
     </main>
 
+    <!-- Über mich -->
+    <section id="content" class="c-about">
+        <div class="c-about__inner">
+            <h2 class="c-about__heading">Über mich</h2>
+            <p class="c-about__text">
+                Ich bin Vincent Noel Mark, 28, Diplom-Kommunikationsdesigner mit Schwerpunkt UI Design.
+            </p>
+            <p class="c-about__text">
+                Ich entwickle klare, funktionale Interfaces mit Fokus auf Struktur, Typografie und visuelle Präzision. Mein Ansatz ist konzeptionell und reduziert – verstehen, analysieren, gestalten.
+            </p>
+            <p class="c-about__text">
+                Neben digitalem Design arbeite ich fotografisch und künstlerisch. Mich interessieren Bildkomposition, Licht und die Spannung zwischen Ruhe und Ausdruck.
+            </p>
+            <p class="c-about__text">
+                Gute Gestaltung entsteht für mich aus Klarheit, Haltung und einem bewussten Umgang mit Form und Inhalt.
+            </p>
+        </div>
+    </section>
 
     <footer class="c-footer">
         <div class="c-footer__inner">
@@ -203,24 +121,11 @@
         </div>
     </footer>
 
-    <div class="c-bottom-bar">
-        <div class="c-bottom-bar__inner">
-            <div class="c-bottom-bar__left">
-                <span data-i18n="footer.designerTitle">Diplom Designer</span>
-                <span>Darmstadt</span>
-            </div>
-            <div class="c-bottom-bar__right">
-                <span>vincent.mark@gmx.de</span>
-            </div>
-        </div>
-    </div>
-
     <!-- ═══════════════════════════════════════════════
          OVERLAY: Athen
          ═══════════════════════════════════════════════ -->
     <div class="c-overlay" id="overlay-athen">
         <div class="c-single">
-            <p class="c-single__name">Vincent Noel Mark</p>
             <div class="c-gallery">
                 <figure><img src="assets/Athen/db5cfc4c-2832-4611-9b34-a645914e3279_rw_1920.png" alt="Athen" loading="lazy"></figure>
                 <figure><img src="assets/Athen/bf48a81e-8e04-41ff-a981-80cd5774f9c5_rw_1920.jpg" alt="Athen" loading="lazy"></figure>
@@ -234,7 +139,7 @@
         <div class="c-title">
             <h1 class="c-title__text">Athen</h1>
         </div>
-        <button class="c-overlay__close" data-close="overlay-athen"><span data-i18n="btn.zurueck">↓ zurück</span></button>
+        <button class="c-overlay__close" data-close="overlay-athen"><span data-i18n="btn.zurueck">← zurück</span></button>
     </div>
 
     <!-- ═══════════════════════════════════════════════
@@ -242,7 +147,6 @@
          ═══════════════════════════════════════════════ -->
     <div class="c-overlay" id="overlay-illustrationen">
         <div class="c-single">
-            <p class="c-single__name">Vincent Noel Mark</p>
             <div class="c-gallery">
                 <figure><img src="assets/Illustrationen/Plakat1.jpg" alt="Illustrationen" loading="lazy"></figure>
                 <figure><img src="assets/Illustrationen/Plakat2.jpg" alt="Illustrationen" loading="lazy"></figure>
@@ -252,7 +156,7 @@
         <div class="c-title">
             <h1 class="c-title__text">Illustrationen</h1>
         </div>
-        <button class="c-overlay__close" data-close="overlay-illustrationen"><span data-i18n="btn.zurueck">↓ zurück</span></button>
+        <button class="c-overlay__close" data-close="overlay-illustrationen"><span data-i18n="btn.zurueck">← zurück</span></button>
     </div>
 
     <!-- ═══════════════════════════════════════════════
@@ -260,7 +164,6 @@
          ═══════════════════════════════════════════════ -->
     <div class="c-overlay" id="overlay-darmstadt-sport">
         <div class="c-single">
-            <p class="c-single__name">Vincent Noel Mark</p>
             <div class="c-gallery">
                 <figure><img src="assets/darmstadt-sport/f299d750-1423-4cf2-bb0b-bf0af151eba2_rw_3840.JPG" alt="Darmstadt Sport" loading="lazy"></figure>
                 <figure><img src="assets/darmstadt-sport/3bdef60c-34f1-4a62-a120-ab715fa80466_rw_1920.jpg" alt="Darmstadt Sport" loading="lazy"></figure>
@@ -273,7 +176,7 @@
         <div class="c-title">
             <h1 class="c-title__text">Darmstadt Sport</h1>
         </div>
-        <button class="c-overlay__close" data-close="overlay-darmstadt-sport"><span data-i18n="btn.zurueck">↓ zurück</span></button>
+        <button class="c-overlay__close" data-close="overlay-darmstadt-sport"><span data-i18n="btn.zurueck">← zurück</span></button>
     </div>
 
     <!-- ═══════════════════════════════════════════════
@@ -281,7 +184,6 @@
          ═══════════════════════════════════════════════ -->
     <div class="c-overlay" id="overlay-odenwald">
         <div class="c-single">
-            <p class="c-single__name">Vincent Noel Mark</p>
             <div class="c-gallery">
                 <figure><img src="assets/Odenwald/Bild1.jpeg" alt="Odenwald" loading="lazy"></figure>
                 <figure><img src="assets/Odenwald/Bild2entwurf.jpeg" alt="Odenwald" loading="lazy"></figure>
@@ -300,7 +202,7 @@
         <div class="c-title">
             <h1 class="c-title__text">Odenwald</h1>
         </div>
-        <button class="c-overlay__close" data-close="overlay-odenwald"><span data-i18n="btn.zurueck">↓ zurück</span></button>
+        <button class="c-overlay__close" data-close="overlay-odenwald"><span data-i18n="btn.zurueck">← zurück</span></button>
     </div>
 
     <!-- ═══════════════════════════════════════════════
@@ -308,7 +210,6 @@
          ═══════════════════════════════════════════════ -->
     <div class="c-overlay" id="overlay-congressus">
         <div class="c-single">
-            <p class="c-single__name">Vincent Noel Mark</p>
             <div class="c-gallery">
                 <figure><img src="assets/Congressus/_DSF0064.jpg" alt="Congressus" loading="lazy"></figure>
                 <figure><img src="assets/Congressus/_DSF0076.jpg" alt="Congressus" loading="lazy"></figure>
@@ -330,7 +231,7 @@
         <div class="c-title">
             <h1 class="c-title__text">Congressus</h1>
         </div>
-        <button class="c-overlay__close" data-close="overlay-congressus"><span data-i18n="btn.zurueck">↓ zurück</span></button>
+        <button class="c-overlay__close" data-close="overlay-congressus"><span data-i18n="btn.zurueck">← zurück</span></button>
     </div>
 
     <!-- ═══════════════════════════════════════════════
@@ -338,7 +239,6 @@
          ═══════════════════════════════════════════════ -->
     <div class="c-overlay" id="overlay-kunst">
         <div class="c-single">
-            <p class="c-single__name">Vincent Noel Mark</p>
             <div class="c-gallery">
                 <figure><img src="assets/Kunst/IMG_5290.JPG" alt="Kunst" loading="lazy"></figure>
                 <figure><img src="assets/Kunst/IMG_5713.JPG" alt="Kunst" loading="lazy"></figure>
@@ -348,7 +248,7 @@
         <div class="c-title">
             <h1 class="c-title__text">Kunst</h1>
         </div>
-        <button class="c-overlay__close" data-close="overlay-kunst"><span data-i18n="btn.zurueck">↓ zurück</span></button>
+        <button class="c-overlay__close" data-close="overlay-kunst"><span data-i18n="btn.zurueck">← zurück</span></button>
     </div>
 
     <!-- ═══════════════════════════════════════════════
@@ -356,7 +256,6 @@
          ═══════════════════════════════════════════════ -->
     <div class="c-overlay" id="overlay-karte">
         <div class="c-single">
-            <p class="c-single__name">Vincent Noel Mark</p>
             <div class="c-gallery">
                 <figure><img src="assets/Karte/karte-preview.png" alt="Karte" loading="lazy"></figure>
             </div>
@@ -364,7 +263,7 @@
         <div class="c-title">
             <h1 class="c-title__text">Karte</h1>
         </div>
-        <button class="c-overlay__close" data-close="overlay-karte"><span data-i18n="btn.zurueck">↓ zurück</span></button>
+        <button class="c-overlay__close" data-close="overlay-karte"><span data-i18n="btn.zurueck">← zurück</span></button>
     </div>
 
     <!-- ═══════════════════════════════════════════════
@@ -372,7 +271,6 @@
          ═══════════════════════════════════════════════ -->
     <div class="c-overlay" id="overlay-montepulciano">
         <div class="c-single">
-            <p class="c-single__name">Vincent Noel Mark</p>
             <div class="c-gallery">
                 <figure><img src="assets/Montepulciano/Bildmonte1.jpeg" alt="Montepulciano" loading="lazy"></figure>
                 <figure><img src="assets/Montepulciano/Bildmonte2.jpeg" alt="Montepulciano" loading="lazy"></figure>
@@ -382,7 +280,7 @@
         <div class="c-title">
             <h1 class="c-title__text">Montepulciano</h1>
         </div>
-        <button class="c-overlay__close" data-close="overlay-montepulciano"><span data-i18n="btn.zurueck">↓ zurück</span></button>
+        <button class="c-overlay__close" data-close="overlay-montepulciano"><span data-i18n="btn.zurueck">← zurück</span></button>
     </div>
 
     <!-- ═══════════════════════════════════════════════
@@ -395,7 +293,7 @@
         <div class="c-title">
             <h1 class="c-title__text">Shop</h1>
         </div>
-        <button class="c-overlay__close" data-close="overlay-shop"><span data-i18n="btn.zurueck">↓ zurück</span></button>
+        <button class="c-overlay__close" data-close="overlay-shop"><span data-i18n="btn.zurueck">← zurück</span></button>
     </div>
 
     <!-- ═══════════════════════════════════════════════
@@ -405,51 +303,123 @@
         <div class="c-single c-single--grid">
             <div class="c-proj-grid">
 
-                <a href="#" class="c-proj-card" data-overlay="athen">
+                <a href="#" class="c-proj-card c-proj-card--portrait" data-overlay="athen" data-color="60,90,140">
                     <div class="c-proj-card__media">
                         <img src="assets/Athen/2044d784-6d2c-4d00-8caa-c116e89c91b7_rw_3840.jpg" alt="Athen" loading="lazy">
                     </div>
+                    <div class="c-proj-card__overlay">
+                        <div class="c-proj-card__info">
+                            <span class="c-proj-card__name">Athen</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__cat">Fotografie</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__year">2024</span>
+                        </div>
+                    </div>
                 </a>
 
-                <a href="#" class="c-proj-card" data-overlay="illustrationen">
+                <a href="#" class="c-proj-card c-proj-card--square" data-overlay="illustrationen" data-color="200,160,80">
                     <div class="c-proj-card__media">
                         <img src="assets/Illustrationen/Plakat1.jpg" alt="Illustrationen" loading="lazy">
                     </div>
+                    <div class="c-proj-card__overlay">
+                        <div class="c-proj-card__info">
+                            <span class="c-proj-card__name">Illustrationen</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__cat">Illustration</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__year">2022–2025</span>
+                        </div>
+                    </div>
                 </a>
 
-                <a href="#" class="c-proj-card" data-overlay="odenwald">
+                <a href="#" class="c-proj-card c-proj-card--land" data-overlay="odenwald" data-color="80,110,60">
                     <div class="c-proj-card__media">
                         <img src="assets/Odenwald/Bild1.jpeg" alt="Odenwald" loading="lazy">
                     </div>
+                    <div class="c-proj-card__overlay">
+                        <div class="c-proj-card__info">
+                            <span class="c-proj-card__name">Odenwald</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__cat">Fotografie</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__year">2025</span>
+                        </div>
+                    </div>
                 </a>
 
-                <a href="#" class="c-proj-card" data-overlay="darmstadt-sport">
+                <a href="#" class="c-proj-card c-proj-card--portrait" data-overlay="darmstadt-sport" data-color="50,120,170">
                     <div class="c-proj-card__media">
                         <img src="assets/darmstadt-sport/4633f802-8c02-49f3-a788-155add0a04e5_rw_1920.jpg" alt="Darmstadt Sport" loading="lazy">
                     </div>
+                    <div class="c-proj-card__overlay">
+                        <div class="c-proj-card__info">
+                            <span class="c-proj-card__name">Sport</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__cat">Fotografie</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__year">2023</span>
+                        </div>
+                    </div>
                 </a>
 
-                <a href="#" class="c-proj-card" data-overlay="congressus">
+                <a href="#" class="c-proj-card c-proj-card--square" data-overlay="congressus" data-color="160,160,160">
                     <div class="c-proj-card__media">
                         <img src="assets/Congressus/_DSF0064.jpg" alt="Congressus" loading="lazy">
                     </div>
+                    <div class="c-proj-card__overlay">
+                        <div class="c-proj-card__info">
+                            <span class="c-proj-card__name">Congressus</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__cat">Foto Diplom</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__year">2026</span>
+                        </div>
+                    </div>
                 </a>
 
-                <a href="#" class="c-proj-card" data-overlay="kunst">
+                <a href="#" class="c-proj-card c-proj-card--portrait" data-overlay="kunst" data-color="180,50,50">
                     <div class="c-proj-card__media">
                         <img src="assets/Kunst/IMG_5290.JPG" alt="Kunst" loading="lazy">
                     </div>
-                </a>
-
-                <a href="#" class="c-proj-card" data-overlay="karte">
-                    <div class="c-proj-card__media">
-                        <img src="assets/Karte/karte-preview.png" alt="Karte" loading="lazy">
+                    <div class="c-proj-card__overlay">
+                        <div class="c-proj-card__info">
+                            <span class="c-proj-card__name">Kunst</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__cat">Kunst</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__year">2020–2022</span>
+                        </div>
                     </div>
                 </a>
 
-                <a href="#" class="c-proj-card" data-overlay="montepulciano">
+                <a href="#" class="c-proj-card c-proj-card--land" data-overlay="karte" data-color="210,130,50">
+                    <div class="c-proj-card__media">
+                        <img src="assets/Karte/karte-preview.png" alt="Karte" loading="lazy">
+                    </div>
+                    <div class="c-proj-card__overlay">
+                        <div class="c-proj-card__info">
+                            <span class="c-proj-card__name">Karte</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__cat">Illustration</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__year">2025</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="c-proj-card c-proj-card--square" data-overlay="montepulciano" data-color="170,130,80">
                     <div class="c-proj-card__media">
                         <img src="assets/Montepulciano/Bildmonte2.jpeg" alt="Montepulciano" loading="lazy">
+                    </div>
+                    <div class="c-proj-card__overlay">
+                        <div class="c-proj-card__info">
+                            <span class="c-proj-card__name">Montepulciano</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__cat">Fotografie</span>
+                            <span class="c-proj-card__sep">–</span>
+                            <span class="c-proj-card__year">2025</span>
+                        </div>
                     </div>
                 </a>
 
@@ -458,7 +428,7 @@
         <div class="c-title">
             <h1 class="c-title__text" data-i18n="overlay.projekte">Projekte</h1>
         </div>
-        <button class="c-overlay__close" data-close="overlay-projekte"><span data-i18n="btn.zurueck">↓ zurück</span></button>
+        <button class="c-overlay__close" data-close="overlay-projekte"><span data-i18n="btn.zurueck">← zurück</span></button>
     </div>
 
     <!-- ═══════════════════════════════════════════════
@@ -500,12 +470,7 @@
         <div class="c-title">
             <h1 class="c-title__text">Impressum</h1>
         </div>
-        <button class="c-overlay__close" data-close="overlay-impressum"><span data-i18n="btn.zurueck">↓ zurück</span></button>
-    </div>
-
-    <div class="c-social-nav">
-        <a href="https://www.instagram.com/vincentnoelmark?igsh=dDgzZGZoaTJmdDUw&utm_source=qr" target="_blank" class="c-social-btn">IG</a>
-        <a href="https://www.linkedin.com/" target="_blank" class="c-social-btn">LI</a>
+        <button class="c-overlay__close" data-close="overlay-impressum"><span data-i18n="btn.zurueck">← zurück</span></button>
     </div>
 
     <script>
@@ -532,23 +497,45 @@
                 images.forEach(function (img) { img.src = img.dataset.src; });
             }
 
-            // Filter-Nav ausblenden wenn Footer sichtbar
-            var filterNav = document.querySelector('.c-filter-nav');
-            var footer = document.querySelector('.c-footer');
-            if (filterNav && footer) {
-                var footerObserver = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (entry) {
-                        if (entry.isIntersecting) {
-                            filterNav.classList.add('is-hidden');
-                        } else {
-                            filterNav.classList.remove('is-hidden');
-                        }
-                    });
-                }, { threshold: 0 });
-                footerObserver.observe(footer);
+            // Scroll-Effekt: Titel schrumpft + wird schwarz (via IntersectionObserver)
+            var mainTitle = document.getElementById('main-title');
+            var hero = document.querySelector('.c-hero');
+            if (mainTitle && hero) {
+                var titleObs = new IntersectionObserver(function (entries) {
+                    if (entries[0].isIntersecting) {
+                        mainTitle.classList.add('is-hero');
+                    } else {
+                        mainTitle.classList.remove('is-hero');
+                    }
+                }, { threshold: 0.3 });
+                titleObs.observe(hero);
             }
 
-            // Overlay öffnen
+            // Hero-Slideshow
+            var heroSlides = document.querySelectorAll('.c-hero__img');
+            if (heroSlides.length > 1) {
+                var heroIdx = 0;
+                setInterval(function () {
+                    heroSlides[heroIdx].classList.remove('is-active');
+                    heroIdx = (heroIdx + 1) % heroSlides.length;
+                    heroSlides[heroIdx].classList.add('is-active');
+                }, 3500);
+            }
+
+            // Burger-Menü Toggle
+            var burger = document.getElementById('burger-toggle');
+            var slideMenu = document.getElementById('slide-menu');
+            if (burger && slideMenu) {
+                burger.addEventListener('click', function () {
+                    burger.classList.toggle('is-open');
+                    slideMenu.classList.toggle('is-open');
+                });
+            }
+
+            // Home-Link im Menü
+            var navHome = document.getElementById('nav-home');
+
+            // Overlay öffnen (auch Slide-Menü schließen)
             document.querySelectorAll('[data-overlay]').forEach(function (el) {
                 el.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -561,8 +548,27 @@
                     overlay.classList.add('is-visible');
                     overlay.style.zIndex = '9001';
                     document.body.style.overflow = 'hidden';
+                    // Home-Link anzeigen
+                    document.body.classList.add('has-overlay');
+                    // Slide-Menü schließen
+                    if (burger) burger.classList.remove('is-open');
+                    if (slideMenu) slideMenu.classList.remove('is-open');
                 });
             });
+
+            // Home-Klick: alle Overlays schließen
+            if (navHome) {
+                navHome.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelectorAll('.c-overlay.is-visible').forEach(function (o) {
+                        o.classList.remove('is-visible');
+                    });
+                    document.body.style.overflow = '';
+                    document.body.classList.remove('has-overlay');
+                    if (burger) burger.classList.remove('is-open');
+                    if (slideMenu) slideMenu.classList.remove('is-open');
+                });
+            }
 
             // Overlay schließen
             document.querySelectorAll('[data-close]').forEach(function (el) {
@@ -570,26 +576,31 @@
                     var id = el.getAttribute('data-close');
                     document.getElementById(id).classList.remove('is-visible');
                     document.body.style.overflow = '';
+                    document.body.classList.remove('has-overlay');
                 });
             });
 
-            // ESC-Taste schließt Overlay
+            // ESC-Taste schließt Overlay + Slide-Menü
             document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') {
                     document.querySelectorAll('.c-overlay.is-visible').forEach(function (o) {
                         o.classList.remove('is-visible');
                     });
                     document.body.style.overflow = '';
+                    document.body.classList.remove('has-overlay');
+                    if (burger) burger.classList.remove('is-open');
+                    if (slideMenu) slideMenu.classList.remove('is-open');
                 }
             });
 
             // Sprachsteuerung DE / EN
             var translations = {
                 de: {
+                    'nav.home': 'Home',
                     'nav.projekte': 'projekte',
                     'nav.shop': 'shop',
                     'nav.kontakt': 'kontakt',
-                    'btn.zurueck': '↓ zurück',
+                    'btn.zurueck': '← zurück',
                     'footer.designerTitle': 'Diplom Designer',
                     'footer.kontakt': 'KONTAKT',
                     'footer.rechtliches': 'RECHTLICHES',
@@ -597,10 +608,11 @@
                     'overlay.projekte': 'Projekte'
                 },
                 en: {
+                    'nav.home': 'Home',
                     'nav.projekte': 'projects',
                     'nav.shop': 'shop',
                     'nav.kontakt': 'contact',
-                    'btn.zurueck': '↓ back',
+                    'btn.zurueck': '← back',
                     'footer.designerTitle': 'Diploma Designer',
                     'footer.kontakt': 'CONTACT',
                     'footer.rechtliches': 'LEGAL',
@@ -630,6 +642,59 @@
                     setLang(currentLang === 'de' ? 'en' : 'de');
                 });
             }
+
+            // Farbextraktion — prägnanteste Farbe (höchste Sättigung)
+            function getVividColor(img, callback) {
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                canvas.width = 50;
+                canvas.height = 50;
+                ctx.drawImage(img, 0, 0, 50, 50);
+                var data = ctx.getImageData(0, 0, 50, 50).data;
+                var pixels = [];
+                for (var i = 0; i < data.length; i += 4) {
+                    var pr = data[i], pg = data[i + 1], pb = data[i + 2];
+                    var max = Math.max(pr, pg, pb), min = Math.min(pr, pg, pb);
+                    var sat = max === 0 ? 0 : (max - min) / max;
+                    pixels.push({ r: pr, g: pg, b: pb, sat: sat });
+                }
+                pixels.sort(function (a, b) { return b.sat - a.sat; });
+                var top = pixels.slice(0, Math.max(1, Math.floor(pixels.length * 0.15)));
+                var r = 0, g = 0, b = 0;
+                top.forEach(function (p) { r += p.r; g += p.g; b += p.b; });
+                var n = top.length;
+                var fr = Math.round(r / n), fg = Math.round(g / n), fb = Math.round(b / n);
+                // Zu helle Farben → Grau als Fallback
+                if (fr > 220 && fg > 220 && fb > 220) { fr = 160; fg = 160; fb = 160; }
+                callback(fr, fg, fb);
+            }
+
+            document.querySelectorAll('.c-proj-card').forEach(function (card) {
+                var img = card.querySelector('.c-proj-card__media img');
+                var overlay = card.querySelector('.c-proj-card__overlay');
+                if (!img || !overlay) return;
+
+                // Manuelle Farbe via data-color="r,g,b"
+                var manual = card.getAttribute('data-color');
+                if (manual) {
+                    overlay.style.setProperty('--card-color', 'rgb(' + manual + ')');
+                    return;
+                }
+
+                function applyColor() {
+                    try {
+                        getVividColor(img, function (r, g, b) {
+                            overlay.style.setProperty('--card-color', 'rgb(' + r + ',' + g + ',' + b + ')');
+                        });
+                    } catch (e) { /* CORS/security — fallback */ }
+                }
+
+                if (img.complete && img.naturalWidth > 0) {
+                    applyColor();
+                } else {
+                    img.addEventListener('load', applyColor);
+                }
+            });
 
             // Hover-Diashow für Cards mit data-slideshow
             document.querySelectorAll('[data-slideshow]').forEach(function (card) {
@@ -661,6 +726,7 @@
             });
         });
     </script>
+
 
 </body>
 </html>
