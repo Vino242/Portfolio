@@ -20,20 +20,40 @@
     document.body.style.overflow = 'hidden';
     if (burgerBtn) burgerBtn.style.opacity = '0';
 
+    // --- Bilder vorladen, dann Animation starten ---
+    var visibleImgs = [];
+    imgs.forEach(function (img, i) {
+        if (img.offsetParent === null && getComputedStyle(img).display === 'none') return;
+        visibleImgs.push({ el: img, originalIdx: i });
+    });
+
+    // Alle sichtbaren Bilder vorladen (dekodieren) bevor Animation startet
+    var preloadPromises = visibleImgs.map(function (item) {
+        var bg = getComputedStyle(item.el).backgroundImage;
+        var url = bg.replace(/url\(['"]?/, '').replace(/['"]?\)/, '');
+        var img = new Image();
+        img.src = url;
+        return new Promise(function (resolve) {
+            if (img.complete) { resolve(); return; }
+            img.onload = resolve;
+            img.onerror = resolve;
+        });
+    });
+
+    Promise.all(preloadPromises).then(startAnimation);
+
+    function startAnimation() {
+
     // --- Phase 1: Bilder übereinander aufdecken ---
     var startDelay = 300;
     var stagger = 280;
 
-    var visibleIdx = 0;
-    imgs.forEach(function (img, i) {
-        // Auf Mobile ausgeblendete Bilder überspringen
-        if (img.offsetParent === null && getComputedStyle(img).display === 'none') return;
-
-        var idx = visibleIdx++;
+    var visibleIdx = visibleImgs.length;
+    visibleImgs.forEach(function (item, idx) {
         setTimeout(function () {
-            img.classList.add('is-revealed');
+            item.el.classList.add('is-revealed');
             // Letztes sichtbares Bild: Schrift sofort auf Weiß
-            if (i === imgs.length - 1 && mainTitle) {
+            if (item.originalIdx === imgs.length - 1 && mainTitle) {
                 mainTitle.classList.add('is-final');
             }
         }, startDelay + (idx * stagger));
@@ -110,6 +130,8 @@
             }, 2400);
         }
     }, afterSequence);
+
+    } // end startAnimation
 })();
 
 
