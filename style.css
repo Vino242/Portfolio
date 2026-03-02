@@ -257,7 +257,6 @@
         background-size: cover;
         background-position: center;
         transform: translateY(100%);
-        will-change: transform;
     }
 
     .c-preloader__img::before {
@@ -1514,9 +1513,9 @@ img.js-lazy__loaded {
 
 
 @media (max-width: 500px) {
-    /* Zentrierter Titel kleiner auf Mobile */
+    /* Zentrierter Titel größer auf Mobile */
     .c-title__line {
-        font-size: clamp(2.5rem, 12vw, 4rem);
+        font-size: clamp(3rem, 15vw, 5rem);
     }
 
     /* Footer stacked */
