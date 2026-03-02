@@ -24,14 +24,19 @@
     var startDelay = 300;
     var stagger = 280;
 
+    var visibleIdx = 0;
     imgs.forEach(function (img, i) {
+        // Auf Mobile ausgeblendete Bilder überspringen
+        if (img.offsetParent === null && getComputedStyle(img).display === 'none') return;
+
+        var idx = visibleIdx++;
         setTimeout(function () {
             img.classList.add('is-revealed');
-            // Letztes Bild: Schrift sofort auf Weiß
+            // Letztes sichtbares Bild: Schrift sofort auf Weiß
             if (i === imgs.length - 1 && mainTitle) {
                 mainTitle.classList.add('is-final');
             }
-        }, startDelay + (i * stagger));
+        }, startDelay + (idx * stagger));
     });
 
     // Titel einblenden (sofort sichtbar, bleibt durchgehend)
@@ -40,7 +45,7 @@
     }, startDelay + 200);
 
     // --- Phase 2: Container morpht fließend Hoch → Quer → Vollbild ---
-    var afterSequence = startDelay + ((imgs.length - 1) * stagger) + 500 + 300;
+    var afterSequence = startDelay + ((visibleIdx - 1) * stagger) + 500 + 300;
 
     setTimeout(function () {
 
