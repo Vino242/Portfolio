@@ -58,19 +58,23 @@
         });
 
         if (isMobile) {
-            // Mobile: einfacher Fade-Out (kein clip-path, nur opacity)
+            // Mobile: Scale-Up Expansion (GPU-beschleunigt, kein clip-path)
+            imageStack.style.contain = 'none';
+            imageStack.classList.add('is-expanding-mobile');
+            void imageStack.offsetHeight;
+
             setTimeout(function () {
                 if (burgerBtn) {
                     burgerBtn.style.transition = 'opacity 0.8s ease';
                     burgerBtn.style.opacity = '1';
                 }
-            }, 400);
+            }, 1200);
 
             setTimeout(function () {
                 preloader.classList.add('is-done');
                 document.body.style.overflow = '';
                 setTimeout(function () { preloader.remove(); }, 1200);
-            }, 600);
+            }, 1800);
 
         } else {
             // Desktop: clip-path Expansion
