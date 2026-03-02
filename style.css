@@ -1576,6 +1576,12 @@ img.js-lazy__loaded {
         columns: 1;
     }
 
+    /* Farb-Effekt für kleine Cards anpassen */
+    .c-proj-card__overlay::before {
+        inset: 10px;
+        filter: blur(25px);
+    }
+
     /* Overlay-Close-Button kleiner */
     .c-overlay__close {
         padding: 10px 28px;
