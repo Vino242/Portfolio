@@ -44,65 +44,72 @@
         if (mainTitle) mainTitle.classList.add('is-visible');
     }, startDelay + 200);
 
-    // --- Phase 2: Container morpht fließend Hoch → Quer → Vollbild ---
+    // --- Phase 2: Expansion (Desktop) oder Fade (Mobile) ---
     var afterSequence = startDelay + ((visibleIdx - 1) * stagger) + 500 + 300;
+    var isMobile = window.innerWidth <= 500;
 
     setTimeout(function () {
 
-        // Nicht-finale Bilder ausblenden (weniger Paint-Arbeit)
+        // Nicht-finale Bilder ausblenden
         imgs.forEach(function (img) {
             if (!img.classList.contains('c-preloader__img--final')) {
                 img.style.visibility = 'hidden';
             }
         });
 
-        // Aktuelle Position erfassen bevor Layout sich ändert
-        var rect = imageStack.getBoundingClientRect();
-        var vw = window.innerWidth;
-        var vh = window.innerHeight;
+        if (isMobile) {
+            // Mobile: einfacher Fade-Out (kein clip-path, nur opacity)
+            setTimeout(function () {
+                if (burgerBtn) {
+                    burgerBtn.style.transition = 'opacity 0.8s ease';
+                    burgerBtn.style.opacity = '1';
+                }
+            }, 400);
 
-        // clip-path Werte berechnen (% relativ zum Vollbild-Element)
-        var clipTop = (rect.top / vh * 100).toFixed(2);
-        var clipRight = ((vw - rect.right) / vw * 100).toFixed(2);
-        var clipBottom = ((vh - rect.bottom) / vh * 100).toFixed(2);
-        var clipLeft = (rect.left / vw * 100).toFixed(2);
+            setTimeout(function () {
+                preloader.classList.add('is-done');
+                document.body.style.overflow = '';
+                setTimeout(function () { preloader.remove(); }, 1200);
+            }, 600);
 
-        // contain entfernen
-        imageStack.style.contain = 'none';
+        } else {
+            // Desktop: clip-path Expansion
+            var rect = imageStack.getBoundingClientRect();
+            var vw = window.innerWidth;
+            var vh = window.innerHeight;
 
-        // Initiale clip-path setzen (preserviert die visuelle Größe)
-        imageStack.style.clipPath = 'inset(' + clipTop + '% ' + clipRight + '% ' + clipBottom + '% ' + clipLeft + '% round 4px)';
+            var clipTop = (rect.top / vh * 100).toFixed(2);
+            var clipRight = ((vw - rect.right) / vw * 100).toFixed(2);
+            var clipBottom = ((vh - rect.bottom) / vh * 100).toFixed(2);
+            var clipLeft = (rect.left / vw * 100).toFixed(2);
 
-        // Container auf Vollbild expandieren (CSS-Klasse)
-        imageStack.classList.add('is-expanding');
+            imageStack.style.contain = 'none';
+            imageStack.style.clipPath = 'inset(' + clipTop + '% ' + clipRight + '% ' + clipBottom + '% ' + clipLeft + '% round 4px)';
+            imageStack.classList.add('is-expanding');
+            void imageStack.offsetHeight;
 
-        // Reflow erzwingen damit clip-path + Positionsänderung synchron greifen
-        void imageStack.offsetHeight;
+            imageStack.animate([
+                { clipPath: 'inset(' + clipTop + '% ' + clipRight + '% ' + clipBottom + '% ' + clipLeft + '% round 4px)' },
+                { clipPath: 'inset(0% 0% 0% 0% round 0px)' }
+            ], {
+                duration: 2200,
+                easing: 'cubic-bezier(0.6, 0.01, 0.05, 1)',
+                fill: 'forwards'
+            });
 
-        // GPU-beschleunigte clip-path Animation (Web Animations API)
-        imageStack.animate([
-            { clipPath: 'inset(' + clipTop + '% ' + clipRight + '% ' + clipBottom + '% ' + clipLeft + '% round 4px)' },
-            { clipPath: 'inset(0% 0% 0% 0% round 0px)' }
-        ], {
-            duration: 2200,
-            easing: 'cubic-bezier(0.6, 0.01, 0.05, 1)',
-            fill: 'forwards'
-        });
+            setTimeout(function () {
+                if (burgerBtn) {
+                    burgerBtn.style.transition = 'opacity 1.2s cubic-bezier(0.65, 0, 0.35, 1)';
+                    burgerBtn.style.opacity = '1';
+                }
+            }, 1600);
 
-        // Burger einblenden
-        setTimeout(function () {
-            if (burgerBtn) {
-                burgerBtn.style.transition = 'opacity 1.2s cubic-bezier(0.65, 0, 0.35, 1)';
-                burgerBtn.style.opacity = '1';
-            }
-        }, 1600);
-
-        // Preloader ausblenden nachdem Expansion fertig
-        setTimeout(function () {
-            preloader.classList.add('is-done');
-            document.body.style.overflow = '';
-            setTimeout(function () { preloader.remove(); }, 1400);
-        }, 2400);
+            setTimeout(function () {
+                preloader.classList.add('is-done');
+                document.body.style.overflow = '';
+                setTimeout(function () { preloader.remove(); }, 1400);
+            }, 2400);
+        }
     }, afterSequence);
 })();
 
