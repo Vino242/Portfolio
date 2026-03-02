@@ -22,11 +22,15 @@
 
     // --- Phase 1: Bilder übereinander aufdecken ---
     var startDelay = 300;
-    var stagger = 200;
+    var stagger = 280;
 
     imgs.forEach(function (img, i) {
         setTimeout(function () {
             img.classList.add('is-revealed');
+            // Letztes Bild: Schrift sofort auf Weiß
+            if (i === imgs.length - 1 && mainTitle) {
+                mainTitle.classList.add('is-final');
+            }
         }, startDelay + (i * stagger));
     });
 
@@ -36,11 +40,9 @@
     }, startDelay + 200);
 
     // --- Phase 2: Container morpht fließend Hoch → Quer → Vollbild ---
-    var afterSequence = startDelay + ((imgs.length - 1) * stagger) + 650 + 300;
+    var afterSequence = startDelay + ((imgs.length - 1) * stagger) + 500 + 300;
 
     setTimeout(function () {
-        // Schrift sofort auf Weiß (letztes Bild ist dunkel)
-        if (mainTitle) mainTitle.classList.add('is-final');
 
         // Nicht-finale Bilder ausblenden (weniger Paint-Arbeit)
         imgs.forEach(function (img) {
@@ -140,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 mainTitle.style.opacity = '0';
             }
-        }, { threshold: 0.15 });
+        }, { threshold: 0.55 });
         titleObs.observe(hero);
     }
 
