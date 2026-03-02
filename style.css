@@ -657,6 +657,11 @@ body.has-overlay .c-title--center {
     transition: transform 0.3s ease;
 }
 
+/* Burger rot auf Overlay-Seiten */
+body.has-overlay .c-burger span {
+    background: var(--red);
+}
+
 .c-burger.is-open span:nth-child(1) {
     transform: translateY(5.5px) rotate(45deg);
 }
@@ -1438,10 +1443,10 @@ img.js-lazy__loaded {
 }
 
 .c-proj-card:hover .c-proj-card__media img {
-    opacity: 0;
+    opacity: 1;
 }
 
-/* Farbfeld-Overlay mit Titel — weiche Kanten via blur */
+/* Liquid Glass Overlay — Milchglas bei Hover/Tap */
 .c-proj-card__overlay {
     position: absolute;
     inset: 0;
@@ -1449,18 +1454,13 @@ img.js-lazy__loaded {
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.6s ease;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 2px;
+    transition: opacity 0.5s ease;
     pointer-events: none;
     z-index: 2;
-}
-
-.c-proj-card__overlay::before {
-    content: '';
-    position: absolute;
-    inset: 50px;
-    background: var(--card-color, transparent);
-    filter: blur(40px);
-    z-index: -1;
 }
 
 .c-proj-card:hover .c-proj-card__overlay {
@@ -1560,9 +1560,16 @@ img.js-lazy__loaded {
         columns: 1;
     }
 
-    /* Hover-Effekt auf Mobile deaktivieren (kein Touch-Hover) */
+    /* Projekt-Cards: Milchglas bei Tap auf Mobile */
     .c-proj-card__overlay {
-        display: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .c-proj-card__name,
+    .c-proj-card__cat,
+    .c-proj-card__year,
+    .c-proj-card__sep {
+        font-size: 0.8rem;
     }
 
     /* Overlay-Close-Button kleiner */
