@@ -162,6 +162,82 @@
 }
 
 /* ============================================
+   PRELOADER
+   ============================================ */
+
+.c-preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 8000;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.c-preloader__images {
+    position: relative;
+    width: 340px;
+    height: 440px;
+    overflow: hidden;
+    contain: layout style paint;
+}
+
+.c-preloader__img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px;
+    transform: translateY(100%);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.c-preloader__img.is-revealed {
+    animation: preloaderReveal 0.65s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes preloaderReveal {
+    0%   { transform: translateY(100%); }
+    100% { transform: translateY(0); }
+}
+
+/* Expansion: Container wird Vollbild, clip-path öffnet sich (GPU-beschleunigt) */
+.c-preloader__images.is-expanding {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 0;
+}
+
+.c-preloader__images.is-expanding .c-preloader__img {
+    border-radius: 0;
+}
+
+/* Preloader fade-out */
+.c-preloader.is-done {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .c-preloader { display: none; }
+}
+
+@media (max-width: 500px) {
+    .c-preloader__images {
+        width: 220px;
+        height: 265px;
+    }
+}
+
+/* ============================================
    BASE
    ============================================ */
 
@@ -228,45 +304,57 @@ img {
     line-height: 0.9;
 }
 
-/* Titel — Grundzustand (klein, schwarz, oben links) */
-.c-title--vertical {
+/* Titel — zentriert, passt sich an Hintergrund an */
+.c-title--center {
     position: fixed;
-    top: 1.5rem;
-    left: 20px;
-    height: 50vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.26);
+    transform-origin: center center;
+    z-index: 8500;
+    text-align: left;
     padding: 0;
-    transition: height 0.6s ease, fill 0.6s ease;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    mix-blend-mode: difference;
 }
 
-.c-title__svg {
-    height: 100%;
-    width: auto;
+.c-title--center.is-visible {
+    opacity: 1;
+}
+
+.c-title--center.is-final {
+    mix-blend-mode: normal;
+    transition: none;
+}
+
+.c-title--center.is-final .c-title__line {
+    color: white;
+}
+
+.c-title__line {
     display: block;
-    transition: height 0.6s ease;
+    font-family: 'Soehne', 'ABCProphet', 'Bebas Neue', Arial, sans-serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    color: white;
+    line-height: 0.85;
 }
 
-.c-title__svg text {
-    font-family: 'Soehne', 'Soehne', 'ABCProphet', 'Bebas Neue', Arial, sans-serif;
-    font-size: 72px;
-    fill: var(--dark);
-    transition: fill 0.6s ease;
+.c-title__line--second {
+    padding-left: 2.1em;
 }
 
-/* Hero-State: groß + rot (Klasse wird per JS entfernt beim Scrollen) */
-.c-title--vertical.is-hero {
-    height: calc(100vh - 3rem);
-    top: 1.5rem;
-}
-
-.c-title--vertical.is-hero .c-title__svg text {
-    fill: var(--red);
+.c-title__copy {
+    font-size: 0.22em;
+    vertical-align: super;
+    font-weight: 300;
 }
 
 /* Haupttitel ausblenden wenn Overlay offen */
-body.has-overlay .c-title--vertical {
+body.has-overlay .c-title--center {
     display: none;
 }
 
@@ -338,8 +426,6 @@ body.has-overlay .c-title--vertical {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0;
-    transition: opacity 1.5s ease;
 }
 
 .c-hero__img.is-active {
@@ -540,7 +626,7 @@ body.has-overlay .c-title--vertical {
     display: block;
     width: 100%;
     height: 3px;
-    background: var(--red);
+    background: white;
     border-radius: 1px;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
@@ -1396,13 +1482,9 @@ img.js-lazy__loaded {
 
 
 @media (max-width: 500px) {
-    /* Name-Titel oben links — größer + Umbruch nach VINCENT */
-    .c-title__text {
-        font-size: clamp(2rem, 10vw, 3.5rem);
-        letter-spacing: 0.01em;
-    }
-    .c-title__first {
-        display: block;
+    /* Zentrierter Titel kleiner auf Mobile */
+    .c-title__line {
+        font-size: clamp(2.5rem, 12vw, 4rem);
     }
 
     /* Footer stacked */
