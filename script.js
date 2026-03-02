@@ -183,6 +183,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var burger = document.getElementById('burger-toggle');
     var slideMenu = document.getElementById('slide-menu');
     var themeMeta = document.getElementById('theme-color-meta');
+    function resetThemeColor() {
+        if (themeMeta) themeMeta.content = '#ffffff';
+    }
     if (burger && slideMenu) {
         burger.addEventListener('click', function () {
             burger.classList.toggle('is-open');
@@ -211,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.classList.add('has-overlay');
             if (burger) burger.classList.remove('is-open');
             if (slideMenu) slideMenu.classList.remove('is-open');
+            resetThemeColor();
         });
     });
 
@@ -225,6 +229,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.classList.remove('has-overlay');
             if (burger) burger.classList.remove('is-open');
             if (slideMenu) slideMenu.classList.remove('is-open');
+            resetThemeColor();
         });
     }
 
@@ -248,6 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.classList.remove('has-overlay');
             if (burger) burger.classList.remove('is-open');
             if (slideMenu) slideMenu.classList.remove('is-open');
+            resetThemeColor();
         }
     });
 
