@@ -179,13 +179,17 @@ document.addEventListener('DOMContentLoaded', function () {
         titleObs.observe(hero);
     }
 
-    // Burger-Menü Toggle
+    // Burger-Menü Toggle + iPhone theme-color
     var burger = document.getElementById('burger-toggle');
     var slideMenu = document.getElementById('slide-menu');
+    var themeMeta = document.getElementById('theme-color-meta');
     if (burger && slideMenu) {
         burger.addEventListener('click', function () {
             burger.classList.toggle('is-open');
             slideMenu.classList.toggle('is-open');
+            if (themeMeta) {
+                themeMeta.content = slideMenu.classList.contains('is-open') ? '#ff2133' : '#ffffff';
+            }
         });
     }
 
