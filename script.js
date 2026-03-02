@@ -66,6 +66,7 @@
                 }
                 preloader.classList.add('is-done');
                 document.body.style.overflow = '';
+                window.scrollTo(0, 0);
                 setTimeout(function () { preloader.remove(); }, 1200);
             }, 400);
 
@@ -104,6 +105,7 @@
             setTimeout(function () {
                 preloader.classList.add('is-done');
                 document.body.style.overflow = '';
+                window.scrollTo(0, 0);
                 setTimeout(function () { preloader.remove(); }, 1400);
             }, 2400);
         }
