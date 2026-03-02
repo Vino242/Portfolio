@@ -395,8 +395,7 @@ body.has-overlay .c-title--center {
 }
 .c-overlay .c-title .c-title__text {
     color: var(--red);
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+    writing-mode: horizontal-tb;
     font-size: clamp(2rem, 6vw, 3.2rem);
     letter-spacing: 0.03em;
 }
