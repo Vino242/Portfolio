@@ -252,15 +252,20 @@
         display: none;
     }
 
-    /* Mobile Expansion: Scale-Up statt clip-path (GPU-beschleunigt) */
-    .c-preloader__images.is-expanding-mobile {
-        transition: transform 1.6s cubic-bezier(0.6, 0.01, 0.05, 1), border-radius 1.6s cubic-bezier(0.6, 0.01, 0.05, 1);
-        transform: scale(4.5);
-        border-radius: 0;
+    /* Mobile: kein Pseudo-Element, direkt translateY auf dem Div */
+    .c-preloader__img {
+        background-size: cover;
+        background-position: center;
+        transform: translateY(100%);
+        will-change: transform;
     }
 
-    .c-preloader__images.is-expanding-mobile .c-preloader__img {
-        border-radius: 0;
+    .c-preloader__img::before {
+        display: none;
+    }
+
+    .c-preloader__img.is-revealed {
+        animation: preloaderReveal 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
     }
 }
 
