@@ -200,7 +200,7 @@ body {
 img {
     -webkit-user-select: none;
     user-select: none;
-    pointer-events: none;
+    -webkit-touch-callout: none;
 }
 
 a {
@@ -424,9 +424,13 @@ body.has-overlay .c-corner {
     .c-ticker {
         padding: 80px 0 40px;
     }
+    .c-ticker__card {
+        transform: perspective(1143px) rotateY(-40deg) skewY(16deg);
+        -webkit-transform: perspective(1143px) rotateY(-40deg) skewY(16deg);
+    }
     .c-ticker__card:hover {
-        transform: perspective(1143px) rotateY(-38deg) skewY(15deg) translateY(-32px);
-        -webkit-transform: perspective(1143px) rotateY(-38deg) skewY(15deg) translateY(-32px);
+        transform: perspective(1143px) rotateY(-30deg) skewY(10deg) translateY(-20px);
+        -webkit-transform: perspective(1143px) rotateY(-30deg) skewY(10deg) translateY(-20px);
     }
     .c-logo__img {
         height: 36px;

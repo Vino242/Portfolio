@@ -5,6 +5,22 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    // Uhr — Deutsche Zeit (Europe/Berlin)
+    var clockEl = document.getElementById('clock');
+    if (clockEl) {
+        function updateClock() {
+            var now = new Date();
+            var time = now.toLocaleTimeString('de-DE', {
+                timeZone: 'Europe/Berlin',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            clockEl.textContent = time + ' DE';
+        }
+        updateClock();
+        setInterval(updateClock, 10000);
+    }
+
     // Image Protection — Rechtsklick, Drag, Textauswahl auf Bildern
     document.addEventListener('contextmenu', function (e) {
         if (e.target.tagName === 'IMG') e.preventDefault();
