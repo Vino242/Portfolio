@@ -28,18 +28,17 @@ document.addEventListener('DOMContentLoaded', function () {
         images.forEach(function (img) { img.src = img.dataset.src; });
     }
 
-    // Scroll-Effekt: Logo ausblenden wenn Hero nicht sichtbar
-    var mainTitle = document.getElementById('main-title');
+    // Scroll-Effekt: Corner-Labels ausblenden wenn Hero nicht sichtbar, Logo bleibt
+    var corners = document.querySelectorAll('.c-corner');
     var hero = document.querySelector('.c-hero');
-    if (mainTitle && hero) {
-        var titleObs = new IntersectionObserver(function (entries) {
-            if (entries[0].isIntersecting) {
-                mainTitle.style.opacity = '1';
-            } else {
-                mainTitle.style.opacity = '0';
-            }
-        }, { threshold: 0.55 });
-        titleObs.observe(hero);
+    if (hero && corners.length) {
+        var heroObs = new IntersectionObserver(function (entries) {
+            var visible = entries[0].isIntersecting;
+            corners.forEach(function (c) {
+                c.style.opacity = visible ? '1' : '0';
+            });
+        }, { threshold: 0.85 });
+        heroObs.observe(hero);
     }
 
     // Burger-Menü Toggle + iPhone theme-color
