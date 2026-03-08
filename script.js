@@ -5,6 +5,17 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    // Image Protection — Rechtsklick, Drag, Textauswahl auf Bildern
+    document.addEventListener('contextmenu', function (e) {
+        if (e.target.tagName === 'IMG') e.preventDefault();
+    });
+    document.addEventListener('dragstart', function (e) {
+        if (e.target.tagName === 'IMG') e.preventDefault();
+    });
+    document.querySelectorAll('img').forEach(function (img) {
+        img.setAttribute('draggable', 'false');
+    });
+
     // Lazy Loading
     const images = document.querySelectorAll('img.js-lazy__image');
     if ('IntersectionObserver' in window) {

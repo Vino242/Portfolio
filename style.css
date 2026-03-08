@@ -196,6 +196,13 @@ body {
     margin: 0;
 }
 
+/* Image Protection — kein Auswählen/Speichern */
+img {
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
 a {
     text-decoration: none;
     color: inherit;
