@@ -5,39 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="theme-color" content="#ffffff" id="theme-color-meta">
     <title>Vincent Noel Mark</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="assets/logoneu.png">
+    <link rel="apple-touch-icon" href="assets/logoneu.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Preloader -->
-    <div class="c-preloader" id="preloader">
-        <div class="c-preloader__images">
-            <div class="c-preloader__img" style="background-image: url('assets/Montepulciano/Bildmonte3.jpeg')"></div>
-            <div class="c-preloader__img" style="background-image: url('assets/Montepulciano/Bildmonte1.jpeg')"></div>
-            <div class="c-preloader__img" style="background-image: url('assets/Congressus/_DSF9397.jpg')"></div>
-            <div class="c-preloader__img" style="background-image: url('assets/Congressus/_DSF9345.jpg')"></div>
-            <div class="c-preloader__img" style="background-image: url('assets/Illustrationen/Plakat1.jpg')"></div>
-            <div class="c-preloader__img" style="background-image: url('assets/Odenwald/Bild1.jpeg')"></div>
-            <div class="c-preloader__img" style="background-image: url('assets/Athen/db5cfc4c-2832-4611-9b34-a645914e3279_rw_1920.jpg')"></div>
-            <div class="c-preloader__img" style="background-image: url('assets/Congressus/_DSF0064.jpg')"></div>
-            <div class="c-preloader__img c-preloader__img--final" style="background-image: url('assets/Congressus/_DSF9363.jpg')"></div>
-        </div>
+    <!-- Logo fixed oben links -->
+    <div class="c-logo" id="main-title">
+        <img src="assets/logoneu.png" alt="Vincent Mark Logo" class="c-logo__img">
     </div>
 
-    <!-- Name fixed auf Hero (nach Preloader) -->
-    <div class="c-title c-title--center" id="main-title">
-        <span class="c-title__line">Vincent <span class="c-title__copy">&copy;</span></span>
-        <span class="c-title__line c-title__line--second">Mark</span>
-    </div>
+    <!-- Corner Labels -->
+    <span class="c-corner c-corner--tr">Available for Work</span>
+    <span class="c-corner c-corner--bl">Design & Development — Frankfurt am Main</span>
+    <span class="c-corner c-corner--br">Scroll Down</span>
 
-    <!-- Burger-Menü oben rechts -->
-    <button class="c-burger" id="burger-toggle">
-        <span></span>
-        <span></span>
-    </button>
 
     <!-- Slide-Menü -->
     <div class="c-slide-menu" id="slide-menu">
@@ -56,13 +41,29 @@
         </div>
     </div>
 
-    <!-- Hero — Fullscreen Bild -->
-    <main class="c-hero">
-        <img class="c-hero__img is-active" src="assets/Congressus/_DSF9363.jpg" alt="">
-        <a href="#content" class="c-scroll-hint">
-            <span>scroll down</span>
-            <span class="c-scroll-hint__arrow">v</span>
-        </a>
+    <!-- Hero — 3D Ticker -->
+    <main class="c-hero c-hero--ticker">
+        <div class="c-ticker">
+            <ul class="c-ticker__track">
+                <li class="c-ticker__card"><img src="assets/Congressus/_DSF9345.jpg" alt="Congressus"></li>
+                <li class="c-ticker__card"><img src="assets/gifs/2.gif" alt="Animation"></li>
+                <li class="c-ticker__card"><img src="assets/Odenwald/Bild1.jpeg" alt="Odenwald"></li>
+                <li class="c-ticker__card"><img src="assets/Montepulciano/Bildmonte3.jpeg" alt="Montepulciano"></li>
+                <li class="c-ticker__card"><img src="assets/gifs/3.gif" alt="Animation"></li>
+                <li class="c-ticker__card"><img src="assets/Illustrationen/Plakat2.jpg" alt="Illustrationen"></li>
+                <li class="c-ticker__card"><img src="assets/Athen/db5cfc4c-2832-4611-9b34-a645914e3279_rw_1920.jpg" alt="Athen"></li>
+                <li class="c-ticker__card"><img src="assets/gifs/4.gif" alt="Animation"></li>
+                <!-- Duplikat für nahtlose Schleife -->
+                <li class="c-ticker__card" aria-hidden="true"><img src="assets/Congressus/_DSF9345.jpg" alt=""></li>
+                <li class="c-ticker__card" aria-hidden="true"><img src="assets/gifs/2.gif" alt=""></li>
+                <li class="c-ticker__card" aria-hidden="true"><img src="assets/Odenwald/Bild1.jpeg" alt=""></li>
+                <li class="c-ticker__card" aria-hidden="true"><img src="assets/Montepulciano/Bildmonte3.jpeg" alt=""></li>
+                <li class="c-ticker__card" aria-hidden="true"><img src="assets/gifs/3.gif" alt=""></li>
+                <li class="c-ticker__card" aria-hidden="true"><img src="assets/Illustrationen/Plakat2.jpg" alt=""></li>
+                <li class="c-ticker__card" aria-hidden="true"><img src="assets/Athen/db5cfc4c-2832-4611-9b34-a645914e3279_rw_1920.jpg" alt=""></li>
+                <li class="c-ticker__card" aria-hidden="true"><img src="assets/gifs/4.gif" alt=""></li>
+            </ul>
+        </div>
     </main>
 
     <!-- Über mich -->

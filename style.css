@@ -161,114 +161,7 @@
     --red:     #ff2133;
 }
 
-/* ============================================
-   PRELOADER
-   ============================================ */
-
-.c-preloader {
-    position: fixed;
-    inset: 0;
-    z-index: 8000;
-    background: var(--bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.c-preloader__images {
-    position: relative;
-    width: 340px;
-    height: 440px;
-    overflow: hidden;
-    contain: layout style paint;
-}
-
-.c-preloader__img {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    border-radius: 4px;
-    background-size: 0 0;
-}
-
-.c-preloader__img::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    background-image: inherit;
-    transform: translateY(100%);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
-
-.c-preloader__img.is-revealed::before {
-    animation: preloaderReveal 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-}
-
-@keyframes preloaderReveal {
-    from { transform: translateY(100%); }
-    to   { transform: translateY(0); }
-}
-
-/* Expansion: Container wird Vollbild, clip-path öffnet sich (GPU-beschleunigt) */
-.c-preloader__images.is-expanding {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 0;
-}
-
-.c-preloader__images.is-expanding .c-preloader__img {
-    border-radius: 0;
-}
-
-/* Preloader fade-out */
-.c-preloader.is-done {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .c-preloader { display: none; }
-}
-
-@media (max-width: 500px) {
-    .c-preloader__images {
-        width: 220px;
-        height: 265px;
-    }
-
-    /* Mobile: nur 4 Bilder zeigen (1, 5, 8, 9=final) → weniger GPU-Last */
-    .c-preloader__img:nth-child(2),
-    .c-preloader__img:nth-child(3),
-    .c-preloader__img:nth-child(4),
-    .c-preloader__img:nth-child(6),
-    .c-preloader__img:nth-child(7) {
-        display: none;
-    }
-
-    /* Mobile: kein Pseudo-Element, direkt translateY auf dem Div */
-    .c-preloader__img {
-        background-size: cover;
-        background-position: center;
-        transform: translateY(100%);
-        contain: strict;
-    }
-
-    .c-preloader__img::before {
-        display: none;
-    }
-
-    .c-preloader__img.is-revealed {
-        animation: preloaderReveal 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
-    }
-}
+/* (Preloader entfernt — Ticker ist jetzt dauerhafter Hero) */
 
 /* ============================================
    BASE
@@ -292,7 +185,7 @@ body::-webkit-scrollbar {
 }
 
 body {
-    background-color: var(--bg);
+    background-color: #fff;
     color: var(--dark);
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 12.6pt;
@@ -337,51 +230,57 @@ img {
     line-height: 0.9;
 }
 
-/* Titel — zentriert, passt sich an Hintergrund an */
-.c-title--center {
+/* Logo — fixed oben links */
+.c-logo {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.26);
-    transform-origin: center center;
+    top: 20px;
+    left: 20px;
     z-index: 8500;
-    text-align: left;
-    padding: 0;
     pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.8s ease;
 }
 
-.c-title--center.is-visible {
-    opacity: 1;
-}
-
-.c-title--center.is-final {
-    transition: opacity 0.5s ease;
-}
-
-.c-title__line {
+.c-logo__img {
+    height: 58px;
+    width: auto;
     display: block;
-    font-family: 'Soehne', 'ABCProphet', 'Bebas Neue', Arial, sans-serif;
-    font-size: clamp(4rem, 10vw, 9rem);
-    font-weight: 300;
-    letter-spacing: 0.02em;
-    color: white;
-    line-height: 0.85;
 }
 
-.c-title__line--second {
-    padding-left: 2.1em;
+/* Logo ausblenden wenn Overlay offen */
+body.has-overlay .c-logo {
+    display: none;
 }
 
-.c-title__copy {
-    font-size: 0.22em;
-    vertical-align: super;
-    font-weight: 300;
+/* Corner Labels */
+.c-corner {
+    position: fixed;
+    z-index: 7000;
+    font-family: 'Soehne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #000;
+    pointer-events: none;
 }
 
-/* Haupttitel ausblenden wenn Overlay offen */
-body.has-overlay .c-title--center {
+.c-corner--tr {
+    top: 24px;
+    right: 20px;
+    text-align: right;
+}
+
+.c-corner--bl {
+    bottom: 24px;
+    left: 20px;
+}
+
+.c-corner--br {
+    bottom: 24px;
+    right: 20px;
+    text-align: right;
+}
+
+body.has-overlay .c-corner {
     display: none;
 }
 
@@ -430,32 +329,94 @@ body.has-overlay .c-title--center {
 
 
 /* ============================================
-   HERO — Fullscreen Slideshow
+   HERO — 3D Ticker
    ============================================ */
 
 .c-hero {
     position: relative;
     width: 100%;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
+    background: #fff;
 }
 
-.c-hero__slides {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.c-hero__img {
+/* Nebel von unten */
+.c-hero::after {
+    content: '';
     position: absolute;
-    inset: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 68%;
+    background: linear-gradient(to top, #fff 0%, rgba(255,255,255,0.4) 60%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Ticker-Wrapper mit Edge-Fade */
+.c-ticker {
+    width: 100%;
+    overflow: hidden;
+    padding: 100px 0 60px;
+    mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgb(0,0,0) 22%, rgb(0,0,0) 78%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgb(0,0,0) 22%, rgb(0,0,0) 78%, rgba(0,0,0,0) 100%);
+}
+
+.c-ticker__track {
+    display: flex;
+    list-style: none;
+    gap: 16px;
+    width: max-content;
+    animation: tickerScroll 60s linear infinite;
+    will-change: transform;
+}
+
+@keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.c-ticker__card {
+    flex-shrink: 0;
+    width: 200px;
+    height: 250px;
+    overflow: hidden;
+    transform: perspective(1143px) rotateY(-50deg) skewY(20deg);
+    -webkit-transform: perspective(1143px) rotateY(-50deg) skewY(20deg);
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+}
+
+.c-ticker__card:hover {
+    transform: perspective(1143px) rotateY(-38deg) skewY(15deg) translateY(-48px);
+    -webkit-transform: perspective(1143px) rotateY(-38deg) skewY(15deg) translateY(-48px);
+}
+
+.c-ticker__card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    display: block;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
-.c-hero__img.is-active {
-    opacity: 1;
+@media (prefers-reduced-motion: reduce) {
+    .c-ticker__track { animation: none; }
+}
+
+@media (max-width: 500px) {
+    .c-ticker__card {
+        width: 140px;
+        height: 175px;
+    }
+    .c-ticker {
+        padding: 40px 0;
+    }
 }
 
 /* ============================================
@@ -1265,7 +1226,7 @@ img.js-lazy__loaded {
 
 .c-gallery {
     columns: 2;
-    column-gap: 32px;
+    column-gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -1406,7 +1367,7 @@ img.js-lazy__loaded {
 
 .c-proj-grid {
     columns: 2;
-    column-gap: 32px;
+    column-gap: 20px;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -1414,7 +1375,7 @@ img.js-lazy__loaded {
 
 .c-proj-card {
     break-inside: avoid;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
     position: relative;
     overflow: visible;
     background: none;
