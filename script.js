@@ -28,6 +28,86 @@ document.addEventListener('DOMContentLoaded', function () {
         images.forEach(function (img) { img.src = img.dataset.src; });
     }
 
+    // Ticker — Auto-Scroll + Drag/Swipe mit Momentum
+    var track = document.querySelector('.c-ticker__track');
+    if (track) {
+        var pos = 0;
+        var baseSpeed = 0.5;          // px pro Frame (Auto-Scroll)
+        var velocity = 0;             // Drag-Momentum
+        var isDragging = false;
+        var startX = 0;
+        var lastX = 0;
+        var lastTime = 0;
+        var halfWidth = track.scrollWidth / 2;
+
+        function tickerLoop() {
+            if (!isDragging) {
+                // Momentum abbauen, dann zurück zu Auto-Scroll
+                if (Math.abs(velocity) > 0.1) {
+                    pos -= velocity;
+                    velocity *= 0.96; // Reibung
+                } else {
+                    velocity = 0;
+                    pos += baseSpeed;
+                }
+            }
+            // Nahtlose Schleife
+            if (pos >= halfWidth) pos -= halfWidth;
+            if (pos < 0) pos += halfWidth;
+            track.style.transform = 'translateX(' + (-pos) + 'px)';
+            requestAnimationFrame(tickerLoop);
+        }
+        requestAnimationFrame(tickerLoop);
+
+        // Drag — Mouse
+        track.addEventListener('mousedown', function (e) {
+            isDragging = true;
+            startX = e.clientX;
+            lastX = e.clientX;
+            lastTime = Date.now();
+            velocity = 0;
+            track.classList.add('is-dragging');
+            e.preventDefault();
+        });
+        window.addEventListener('mousemove', function (e) {
+            if (!isDragging) return;
+            var dx = e.clientX - lastX;
+            var now = Date.now();
+            var dt = now - lastTime || 1;
+            velocity = dx / dt * 16; // px pro Frame
+            pos -= dx;
+            lastX = e.clientX;
+            lastTime = now;
+        });
+        window.addEventListener('mouseup', function () {
+            if (!isDragging) return;
+            isDragging = false;
+            track.classList.remove('is-dragging');
+        });
+
+        // Drag — Touch
+        track.addEventListener('touchstart', function (e) {
+            isDragging = true;
+            startX = e.touches[0].clientX;
+            lastX = e.touches[0].clientX;
+            lastTime = Date.now();
+            velocity = 0;
+        }, { passive: true });
+        track.addEventListener('touchmove', function (e) {
+            if (!isDragging) return;
+            var dx = e.touches[0].clientX - lastX;
+            var now = Date.now();
+            var dt = now - lastTime || 1;
+            velocity = -dx / dt * 16;
+            pos -= dx;
+            lastX = e.touches[0].clientX;
+            lastTime = now;
+        }, { passive: true });
+        track.addEventListener('touchend', function () {
+            isDragging = false;
+        });
+    }
+
     // Scroll-Effekt: Corner-Labels ausblenden wenn Hero nicht sichtbar, Logo bleibt
     var corners = document.querySelectorAll('.c-corner');
     var hero = document.querySelector('.c-hero');

@@ -371,13 +371,12 @@ body.has-overlay .c-corner {
     list-style: none;
     gap: 16px;
     width: max-content;
-    animation: tickerScroll 60s linear infinite;
     will-change: transform;
+    cursor: grab;
 }
 
-@keyframes tickerScroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+.c-ticker__track.is-dragging {
+    cursor: grabbing;
 }
 
 .c-ticker__card {
