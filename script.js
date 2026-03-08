@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var dx = e.touches[0].clientX - lastX;
             var now = Date.now();
             var dt = now - lastTime || 1;
-            velocity = -dx / dt * 16;
+            velocity = dx / dt * 16;
             pos -= dx;
             lastX = e.touches[0].clientX;
             lastTime = now;
