@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 logo.style.opacity = visible ? '1' : '0';
                 logo.style.transition = 'opacity 0.3s ease';
             }
-        }, { threshold: isMobile ? 0.3 : 0.85 });
+        }, { threshold: isMobile ? 0.95 : 0.85 });
         heroObs.observe(hero);
 
         // Mobile: Logo-Kopie im Footer anzeigen
