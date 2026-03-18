@@ -184,9 +184,9 @@ document.addEventListener('DOMContentLoaded', function () {
             var card = e.target.closest('.c-ticker__card');
             if (card && tickerLabel) {
                 var label = card.querySelector('.c-ticker__label');
-                var title = label ? label.textContent.replace('* ', '') : '';
+                var title = label ? label.textContent.replace('✶ ', '') : '';
                 if (title) {
-                    tickerLabel.textContent = '✦ ' + title;
+                    tickerLabel.textContent = '✶ ' + title;
                     tickerLabel.classList.add('is-visible');
                 } else {
                     tickerLabel.classList.remove('is-visible');
@@ -480,41 +480,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-// Scroll-Reveal — CV Sections einblenden (eigenstaendiger Block)
-(function () {
-    function initReveal() {
-        var revealEls = document.querySelectorAll('.js-reveal');
-        if (!revealEls.length) return;
-
-        if ('IntersectionObserver' in window) {
-            var revealObserver = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    } else if (!entry.target.id) {
-                        // About (#content) bleibt immer sichtbar, Rest wird wieder ausgeblendet
-                        entry.target.classList.remove('is-visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            revealEls.forEach(function (el) {
-                revealObserver.observe(el);
-            });
-        } else {
-            // Fallback: alles sofort zeigen
-            revealEls.forEach(function (el) {
-                el.classList.add('is-visible');
-            });
-        }
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initReveal);
-    } else {
-        initReveal();
-    }
-})();
+// (Reveal wird jetzt komplett über den scroll-gekoppelten Block unten gesteuert)
 
 /* Logo-Scroll: Logo wandert vom Header in den Footer
    Nutzt capture-phase weil der Scroll nicht auf window passiert */
@@ -575,41 +541,239 @@ window.addEventListener('load', function () {
     document.addEventListener('scroll', onScroll, true);
 });
 
-// CV Sections — scroll-gekoppeltes Einschieben (About bleibt stehen)
+// CV Sections — scroll-gekoppelt von unten reinschieben (wie Logo, andere Richtung)
+// Nutzt capture-phase + getBoundingClientRect wie der Logo-Scroll
 window.addEventListener('load', function () {
     var all = document.querySelectorAll('.c-cv-section');
     if (all.length < 2) return;
 
-    // Positionen einmalig cachen (vor jeglichem Transform)
+    // Items sammeln (alles außer About)
     var items = [];
-    for (var i = 1; i < all.length; i++) {
-        items.push({ el: all[i], top: all[i].offsetTop });
+    for (var i = 0; i < all.length; i++) {
+        if (all[i].id === 'content') continue;
+        var dist = all[i].classList.contains('c-cv-section--portrait') ? 300 : 200;
+        items.push({ el: all[i], dist: dist });
     }
 
-    function update() {
-        var scrollY = window.pageYOffset;
+    function onScroll() {
         var windowH = window.innerHeight;
 
         for (var i = 0; i < items.length; i++) {
-            var elTop = items[i].top - scrollY;
-            var progress = (windowH * 0.65 - elTop) / (windowH * 0.3);
+            var rect = items[i].el.getBoundingClientRect();
+
+            // progress: 0 = Element ist unterhalb des Viewports, 1 = voll eingefahren
+            var progress = (windowH - rect.top) / (windowH * 0.85);
             if (progress < 0) progress = 0;
             if (progress > 1) progress = 1;
 
-            items[i].el.style.transform = 'translateY(' + (80 * (1 - progress)) + 'px)';
+            // Ease-out wie beim Logo
+            var eased = 1 - Math.pow(1 - progress, 3);
+
+            var yOffset = items[i].dist * (1 - eased);
+            items[i].el.style.transform = 'translateY(' + yOffset + 'px)';
+            items[i].el.style.opacity = eased;
         }
     }
 
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', function () {
-        for (var i = 0; i < items.length; i++) {
-            items[i].el.style.transform = 'none';
-        }
-        for (var i = 0; i < items.length; i++) {
-            items[i].top = items[i].el.offsetTop;
-        }
-        update();
-    });
+    // Erster Durchlauf
+    onScroll();
+
+    // Capture phase wie beim Logo
+    document.addEventListener('scroll', onScroll, true);
+    window.addEventListener('resize', onScroll, { passive: true });
 });
+
+// Overlay-Bilder — Slide von unten beim Scrollen im Overlay
+(function () {
+    function initOverlayReveal() {
+        var figs = document.querySelectorAll('.c-clean__fig, .c-overlay .js-reveal');
+        if (!figs.length) return;
+
+        function onScroll() {
+            for (var i = 0; i < figs.length; i++) {
+                var fig = figs[i];
+                // Nur animieren wenn parent overlay sichtbar ist
+                var overlay = fig.closest('.c-overlay');
+                if (!overlay || !overlay.classList.contains('is-visible')) continue;
+
+                var rect = fig.getBoundingClientRect();
+                var windowH = window.innerHeight;
+                var progress = (windowH - rect.top) / (windowH * 0.7);
+                if (progress < 0) progress = 0;
+                if (progress > 1) progress = 1;
+
+                // Ease-out
+                var eased = 1 - Math.pow(1 - progress, 3);
+
+                fig.style.transform = 'translateY(' + (120 * (1 - eased)) + 'px)';
+                fig.style.opacity = eased;
+            }
+        }
+
+        document.addEventListener('scroll', onScroll, true);
+        // Auch beim Öffnen des Overlays triggern
+        var observer = new MutationObserver(function () {
+            requestAnimationFrame(onScroll);
+        });
+        document.querySelectorAll('.c-overlay').forEach(function (ol) {
+            observer.observe(ol, { attributes: true, attributeFilter: ['class'] });
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initOverlayReveal);
+    } else {
+        initOverlayReveal();
+    }
+})();
+
+// Gallery Swipe — Fullscreen-Bildbetrachter mit Drag/Swipe + Pfeiltasten
+(function () {
+    document.querySelectorAll('[data-gallery]').forEach(function (gallery) {
+        var track = gallery.querySelector('.c-gallery__track');
+        var slides = gallery.querySelectorAll('.c-gallery__slide');
+        var counter = gallery.querySelector('.c-gallery__counter');
+        if (!track || slides.length === 0) return;
+
+        var current = 0;
+        var total = slides.length;
+        var isDragging = false;
+        var startX = 0;
+        var dragX = 0;
+        var startTime = 0;
+        function loadSlide(i) {
+            if (i < 0 || i >= total) return;
+            var img = slides[i].querySelector('img[data-src]');
+            if (img) {
+                img.src = img.getAttribute('data-src');
+                img.removeAttribute('data-src');
+            }
+        }
+
+        function goTo(index) {
+            if (index < 0) index = 0;
+            if (index >= total) index = total - 1;
+            current = index;
+            track.style.transform = 'translateX(' + (-current * 100) + 'vw)';
+            if (counter) counter.textContent = (current + 1) + ' / ' + total;
+            // Aktuelles + nächstes + vorheriges Bild laden
+            loadSlide(current);
+            loadSlide(current + 1);
+            loadSlide(current - 1);
+        }
+
+        var introReady = false;
+
+        // Reset + Intro beim Öffnen des Overlays
+        var overlay = gallery.closest('.c-overlay');
+        if (overlay) {
+            new MutationObserver(function () {
+                if (overlay.classList.contains('is-visible')) {
+                    // Reset
+                    gallery.classList.remove('is-active');
+                    gallery.classList.remove('is-intro');
+                    gallery.classList.remove('is-loaded');
+                    introReady = false;
+                    goTo(0);
+                    // Phase 1: Labels einblenden (mittig, 0.5s stehen lassen)
+                    setTimeout(function () {
+                        gallery.classList.add('is-intro');
+                    }, 100);
+                    // Phase 2: Labels schieben sich neben das Bild
+                    setTimeout(function () {
+                        gallery.classList.add('is-active');
+                    }, 600);
+                    // Phase 3: Bild kommt
+                    setTimeout(function () {
+                        gallery.classList.add('is-loaded');
+                        introReady = true;
+                    }, 1200);
+                } else {
+                    gallery.classList.remove('is-active');
+                    gallery.classList.remove('is-intro');
+                    gallery.classList.remove('is-loaded');
+                    introReady = false;
+                }
+            }).observe(overlay, { attributes: true, attributeFilter: ['class'] });
+        }
+
+        // Counter initial
+        goTo(0);
+
+        // Klick auf linke/rechte Hälfte
+        gallery.addEventListener('click', function (e) {
+            if (isDragging || !introReady) return;
+            var rect = gallery.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            if (x < rect.width / 2) {
+                goTo(current - 1);
+            } else {
+                goTo(current + 1);
+            }
+        });
+
+        // Drag — Mouse
+        track.addEventListener('mousedown', function (e) {
+            isDragging = true;
+            startX = e.clientX;
+            dragX = 0;
+            startTime = Date.now();
+            track.classList.add('is-dragging');
+            e.preventDefault();
+        });
+        window.addEventListener('mousemove', function (e) {
+            if (!isDragging) return;
+            dragX = e.clientX - startX;
+            track.style.transform = 'translateX(calc(' + (-current * 100) + 'vw + ' + dragX + 'px))';
+        });
+        window.addEventListener('mouseup', function () {
+            if (!isDragging) return;
+            isDragging = false;
+            track.classList.remove('is-dragging');
+            finishDrag();
+        });
+
+        // Drag — Touch
+        track.addEventListener('touchstart', function (e) {
+            isDragging = true;
+            startX = e.touches[0].clientX;
+            dragX = 0;
+            startTime = Date.now();
+            track.classList.add('is-dragging');
+        }, { passive: true });
+        track.addEventListener('touchmove', function (e) {
+            if (!isDragging) return;
+            dragX = e.touches[0].clientX - startX;
+            track.style.transform = 'translateX(calc(' + (-current * 100) + 'vw + ' + dragX + 'px))';
+        }, { passive: true });
+        track.addEventListener('touchend', function () {
+            if (!isDragging) return;
+            isDragging = false;
+            track.classList.remove('is-dragging');
+            finishDrag();
+        });
+
+        function finishDrag() {
+            var dt = Date.now() - startTime || 1;
+            var velocity = dragX / dt; // px/ms
+            // Schneller Swipe oder mehr als 25% gezogen
+            if (Math.abs(velocity) > 0.3 || Math.abs(dragX) > window.innerWidth * 0.25) {
+                if (dragX > 0) {
+                    goTo(current - 1);
+                } else {
+                    goTo(current + 1);
+                }
+            } else {
+                goTo(current); // Zurückschnappen
+            }
+        }
+
+        // Pfeiltasten
+        document.addEventListener('keydown', function (e) {
+            if (!overlay || !overlay.classList.contains('is-visible')) return;
+            if (e.key === 'ArrowLeft') goTo(current - 1);
+            if (e.key === 'ArrowRight') goTo(current + 1);
+        });
+    });
+})();
 

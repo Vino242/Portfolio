@@ -205,7 +205,7 @@ body {
     z-index: 10000;
     opacity: 0;
     transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
     background: #fff;
     mix-blend-mode: difference;
     isolation: isolate;
@@ -340,18 +340,9 @@ body.has-overlay .c-corner {
     display: none;
 }
 
-/* Projekttitel im Overlay — vertikal links */
+/* Projekttitel im Overlay — ausgeblendet */
 .c-overlay .c-title {
-    top: 20px;
-    left: 20px;
-    transform: none;
-    padding: 0;
-}
-.c-overlay .c-title .c-title__text {
-    color: var(--red);
-    writing-mode: horizontal-tb;
-    font-size: clamp(2rem, 6vw, 3.2rem);
-    letter-spacing: 0.03em;
+    display: none;
 }
 
 
@@ -364,11 +355,16 @@ body.has-overlay .c-corner {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 40px;
+    padding: 10px 40px;
+    will-change: transform, opacity;
 }
 
 .c-cv-section--portrait {
-    padding: 0 40px 20px;
+    padding: 0 40px;
+}
+
+.c-cv-section--portrait .c-cv-section__label {
+    line-height: 1;
 }
 
 
@@ -388,9 +384,9 @@ body.has-overlay .c-corner {
     font-family: 'Soehne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 0.85rem;
     font-weight: 400;
-    line-height: 1.4;
+    line-height: 1.7;
     color: #000;
-    padding: 8px 0;
+    padding: 0;
 }
 
 .c-cv-section__content {
@@ -435,10 +431,22 @@ body.has-overlay .c-corner {
     color: var(--mid);
 }
 
-.c-cv-section__portrait img {
+.c-cv-section__portrait img,
+.c-cv-section__portrait video,
+.c-cv-section__content video {
     width: 100%;
     height: auto;
     display: block;
+}
+
+.c-cv-section__caption {
+    display: block;
+    text-align: right;
+    font-family: 'Soehne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--mid);
+    margin-top: 6px;
 }
 
 /* CV Row — horizontale Zeile: Name · Rolle   Jahr */
@@ -452,7 +460,11 @@ body.has-overlay .c-corner {
     font-size: 0.85rem;
     font-weight: 400;
     color: #000;
-    line-height: 1.4;
+    line-height: 1.7;
+}
+
+.c-cv-row:first-child {
+    padding-top: 0;
 }
 
 .c-cv-row:last-child {
@@ -510,7 +522,7 @@ body.has-overlay .c-corner {
 /* Responsive */
 @media (max-width: 768px) {
     .c-cv-section {
-        padding: 40px 20px;
+        padding: 10px 20px;
     }
 
     .c-cv-section__inner {
@@ -1358,7 +1370,7 @@ img.js-lazy__loaded {
 }
 
 .c-showcase__item {
-    width: 55%;
+    width: 38%;
     margin-bottom: 100px;
     cursor: auto;
     opacity: 0;
@@ -1401,7 +1413,7 @@ img.js-lazy__loaded {
 }
 
 .c-showcase__pair .c-showcase__item {
-    width: 32%;
+    width: 24%;
     margin: 0;
     margin-bottom: 0;
 }
@@ -1412,15 +1424,15 @@ img.js-lazy__loaded {
 
 /* Solo-Items */
 .c-showcase > .c-showcase__item--center {
-    width: 38%;
+    width: 28%;
 }
 
 .c-showcase > .c-showcase__item--left {
-    width: 32%;
+    width: 24%;
 }
 
 .c-showcase > .c-showcase__item--athen {
-    width: 38%;
+    width: 28%;
     margin-left: 12%;
     margin-right: auto;
     margin-top: -60px;
@@ -1536,7 +1548,7 @@ img.js-lazy__loaded {
     position: fixed;
     inset: 0;
     z-index: 9000;
-    background: var(--bg);
+    background: #fff;
     overflow-y: auto;
     overflow-x: hidden;
     scrollbar-width: none;
@@ -1555,9 +1567,63 @@ img.js-lazy__loaded {
     pointer-events: all;
 }
 
-/* Projekt-Titel (z.B. Athen) — fixed top-left, bleibt stehen */
+/* Projekttitel im Overlay — ausgeblendet (alt) */
 .c-overlay .c-title {
-    z-index: 1;
+    display: none;
+}
+
+/* Overlay Label — dezent oben links */
+.c-overlay__label {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9001;
+    font-family: 'Soehne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+}
+
+.c-overlay__label--center {
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: #000;
+}
+
+/* Clean Layout — Bilder einzeln, groß, zentriert */
+.c-single--clean {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 40px 160px;
+    gap: 80px;
+}
+
+.c-clean__fig {
+    margin: 0;
+    width: 100%;
+    max-width: 550px;
+    opacity: 0;
+    transform: translateY(120px);
+    will-change: transform, opacity;
+}
+
+.c-clean__fig img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .c-single--clean {
+        padding: 80px 16px 100px;
+        gap: 50px;
+    }
 }
 
 .c-overlay__close {
@@ -1588,6 +1654,39 @@ img.js-lazy__loaded {
     margin: 0 auto;
 }
 
+.c-gif-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    height: 100vh;
+    padding: 0 40px;
+}
+
+.c-gif-row img {
+    height: 28vh;
+    width: auto;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+@media (max-width: 900px) {
+    .c-gif-row {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 80px 20px;
+        height: auto;
+    }
+    .c-gif-row img {
+        height: 20vh;
+    }
+}
+
+.c-gallery--3col {
+    columns: 3;
+}
+
 .c-gallery figure {
     break-inside: avoid;
     margin: 0 0 4px;
@@ -1612,6 +1711,136 @@ img.js-lazy__loaded {
     }
 }
 
+
+/* ── Gallery Swipe — Fullscreen-Bildbetrachter ── */
+
+.c-gallery[data-gallery] {
+    columns: unset;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+.c-gallery__track {
+    display: flex;
+    height: 100%;
+    will-change: transform;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.c-gallery__track.is-dragging {
+    transition: none;
+}
+
+.c-gallery__slide {
+    flex: 0 0 100vw;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    box-sizing: border-box;
+}
+
+.c-gallery__slide img {
+    max-width: 60vw;
+    max-height: 80vh;
+    object-fit: contain;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.c-gallery__counter {
+    position: fixed;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Soehne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #000;
+    z-index: 9002;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.c-gallery[data-gallery].is-loaded .c-gallery__counter {
+    opacity: 1;
+    transition: opacity 0.4s ease 0.3s;
+}
+
+/* Intro — "← back" und "next →" zentriert, schieben sich auseinander */
+.c-gallery__intro {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    z-index: 9003;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Phase 1: Intro sichtbar, Labels stehen mittig */
+.c-gallery.is-intro .c-gallery__intro {
+    opacity: 1;
+}
+
+.c-gallery__intro-back,
+.c-gallery__intro-next {
+    font-family: 'Soehne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #000;
+    transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.5s ease;
+}
+
+/* Phase 2: Labels schieben sich neben das Bild */
+.c-gallery.is-active .c-gallery__intro-back {
+    transform: translateX(calc(-33vw));
+}
+
+.c-gallery.is-active .c-gallery__intro-next {
+    transform: translateX(calc(33vw));
+}
+
+/* Track unsichtbar bis Phase 2 */
+.c-gallery[data-gallery] .c-gallery__track {
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.6s ease;
+}
+
+.c-gallery[data-gallery].is-loaded .c-gallery__track {
+    opacity: 1;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.6s ease;
+}
+
+/* Dragging überschreibt Track-Transition */
+.c-gallery__track.is-dragging {
+    transition: none !important;
+}
+
+@media (max-width: 500px) {
+    .c-gallery__slide {
+        padding: 40px 16px;
+    }
+}
 
 /* ============================================
    IMPRESSUM — Textlayout
