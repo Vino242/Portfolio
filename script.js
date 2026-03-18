@@ -184,9 +184,9 @@ document.addEventListener('DOMContentLoaded', function () {
             var card = e.target.closest('.c-ticker__card');
             if (card && tickerLabel) {
                 var label = card.querySelector('.c-ticker__label');
-                var title = label ? label.textContent.replace('✶ ', '') : '';
+                var title = label ? label.textContent.replace('\u2736\uFE0E ', '') : '';
                 if (title) {
-                    tickerLabel.textContent = '✶ ' + title;
+                    tickerLabel.textContent = '\u2736\uFE0E ' + title;
                     tickerLabel.classList.add('is-visible');
                 } else {
                     tickerLabel.classList.remove('is-visible');
