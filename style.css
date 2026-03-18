@@ -656,7 +656,7 @@ body.has-overlay .c-corner {
         height: 175px;
     }
     .c-ticker {
-        padding: 0;
+        padding: 40px 0;
     }
     .c-ticker__card {
         transform: perspective(1143px) rotateY(-40deg) skewY(16deg);
