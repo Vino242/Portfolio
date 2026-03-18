@@ -658,6 +658,11 @@ body.has-overlay .c-corner {
     .c-ticker {
         padding: 60px 0;
         overflow: visible;
+        mask-image: none;
+        -webkit-mask-image: none;
+    }
+    .c-hero {
+        overflow: visible;
     }
     .c-ticker__card {
         transform: perspective(1143px) rotateY(-40deg) skewY(16deg);
