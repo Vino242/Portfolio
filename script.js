@@ -217,12 +217,13 @@ document.addEventListener('DOMContentLoaded', function () {
     var corners = document.querySelectorAll('.c-corner');
     var hero = document.querySelector('.c-hero');
     if (hero && corners.length) {
+        var isMobile = window.innerWidth <= 900;
         var heroObs = new IntersectionObserver(function (entries) {
             var visible = entries[0].isIntersecting;
             corners.forEach(function (c) {
                 c.style.opacity = visible ? '1' : '0';
             });
-        }, { threshold: 0.85 });
+        }, { threshold: isMobile ? 0.3 : 0.85 });
         heroObs.observe(hero);
     }
 
@@ -246,22 +247,46 @@ document.addEventListener('DOMContentLoaded', function () {
     // Home-Link im Menü
     var navHome = document.getElementById('nav-home');
 
+    // Overlay helpers
+    function showOverlay(name, pushHistory) {
+        var id = 'overlay-' + name;
+        var overlay = document.getElementById(id);
+        if (!overlay) return;
+        document.querySelectorAll('.c-overlay').forEach(function (o) {
+            o.style.zIndex = '9000';
+        });
+        overlay.classList.add('is-visible');
+        overlay.style.zIndex = '9001';
+        document.body.style.overflow = 'hidden';
+        document.body.classList.add('has-overlay');
+        if (burger) burger.classList.remove('is-open');
+        if (slideMenu) slideMenu.classList.remove('is-open');
+        resetThemeColor();
+        if (pushHistory) {
+            history.pushState({ overlay: name }, '', '#' + name);
+        }
+    }
+
+    function closeAllOverlays(pushHistory) {
+        document.querySelectorAll('.c-overlay.is-visible').forEach(function (o) {
+            o.classList.remove('is-visible');
+        });
+        document.body.style.overflow = '';
+        document.body.classList.remove('has-overlay');
+        if (burger) burger.classList.remove('is-open');
+        if (slideMenu) slideMenu.classList.remove('is-open');
+        resetThemeColor();
+        if (pushHistory && location.hash) {
+            history.pushState({}, '', location.pathname);
+        }
+    }
+
     // Overlay öffnen (auch Slide-Menü schließen)
     document.querySelectorAll('[data-overlay]').forEach(function (el) {
         el.addEventListener('click', function (e) {
             e.preventDefault();
-            var id = 'overlay-' + el.getAttribute('data-overlay');
-            document.querySelectorAll('.c-overlay').forEach(function (o) {
-                o.style.zIndex = '9000';
-            });
-            var overlay = document.getElementById(id);
-            overlay.classList.add('is-visible');
-            overlay.style.zIndex = '9001';
-            document.body.style.overflow = 'hidden';
-            document.body.classList.add('has-overlay');
-            if (burger) burger.classList.remove('is-open');
-            if (slideMenu) slideMenu.classList.remove('is-open');
-            resetThemeColor();
+            var name = el.getAttribute('data-overlay');
+            showOverlay(name, true);
         });
     });
 
@@ -269,40 +294,38 @@ document.addEventListener('DOMContentLoaded', function () {
     if (navHome) {
         navHome.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelectorAll('.c-overlay.is-visible').forEach(function (o) {
-                o.classList.remove('is-visible');
-            });
-            document.body.style.overflow = '';
-            document.body.classList.remove('has-overlay');
-            if (burger) burger.classList.remove('is-open');
-            if (slideMenu) slideMenu.classList.remove('is-open');
-            resetThemeColor();
+            closeAllOverlays(true);
         });
     }
 
     // Overlay schließen
     document.querySelectorAll('[data-close]').forEach(function (el) {
         el.addEventListener('click', function () {
-            var id = el.getAttribute('data-close');
-            document.getElementById(id).classList.remove('is-visible');
-            document.body.style.overflow = '';
-            document.body.classList.remove('has-overlay');
+            closeAllOverlays(true);
         });
     });
 
     // ESC-Taste schließt Overlay + Slide-Menü
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
-            document.querySelectorAll('.c-overlay.is-visible').forEach(function (o) {
-                o.classList.remove('is-visible');
-            });
-            document.body.style.overflow = '';
-            document.body.classList.remove('has-overlay');
-            if (burger) burger.classList.remove('is-open');
-            if (slideMenu) slideMenu.classList.remove('is-open');
-            resetThemeColor();
+            closeAllOverlays(true);
         }
     });
+
+    // Browser-Back: Overlay schließen oder öffnen
+    window.addEventListener('popstate', function (e) {
+        if (e.state && e.state.overlay) {
+            showOverlay(e.state.overlay, false);
+        } else {
+            closeAllOverlays(false);
+        }
+    });
+
+    // Beim Laden: Hash prüfen und Overlay öffnen
+    if (location.hash) {
+        var name = location.hash.substring(1);
+        showOverlay(name, false);
+    }
 
     // Sprachsteuerung DE / EN
     var translations = {
@@ -311,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'nav.projekte': 'projekte',
             'nav.shop': 'shop',
             'nav.kontakt': 'kontakt',
-            'btn.zurueck': '← zurück',
+            'btn.zurueck': 'Home',
             'footer.designerTitle': 'Diplom Designer',
             'footer.kontakt': 'KONTAKT',
             'footer.rechtliches': 'RECHTLICHES',
@@ -323,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'nav.projekte': 'projects',
             'nav.shop': 'shop',
             'nav.kontakt': 'contact',
-            'btn.zurueck': '← back',
+            'btn.zurueck': 'Home',
             'footer.designerTitle': 'Diploma Designer',
             'footer.kontakt': 'CONTACT',
             'footer.rechtliches': 'LEGAL',
@@ -485,6 +508,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /* Logo-Scroll: Logo wandert vom Header in den Footer
    Nutzt capture-phase weil der Scroll nicht auf window passiert */
 window.addEventListener('load', function () {
+    if (window.innerWidth <= 900) return;
     var logo = document.getElementById('main-title');
     var slot = document.getElementById('footer-logo-slot');
     var footer = document.querySelector('.c-footer');
