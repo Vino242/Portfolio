@@ -5,6 +5,33 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    // Lupen-Cursor — invertiertes Viereck
+    var lens = document.getElementById('lens');
+    if (lens && window.matchMedia('(hover: hover)').matches) {
+        var lx = 0, ly = 0;
+        var mx = 0, my = 0;
+
+        document.addEventListener('mousemove', function (e) {
+            mx = e.clientX;
+            my = e.clientY;
+            lens.style.opacity = '1';
+        });
+
+        document.addEventListener('mouseleave', function () {
+            lens.style.opacity = '0';
+        });
+
+        // Smooth follow mit RAF
+        function moveLens() {
+            lx += (mx - lx) * 0.15;
+            ly += (my - ly) * 0.15;
+            lens.style.left = lx + 'px';
+            lens.style.top = ly + 'px';
+            requestAnimationFrame(moveLens);
+        }
+        requestAnimationFrame(moveLens);
+    }
+
     // Uhr — Deutsche Zeit (Europe/Berlin)
     var clockEl = document.getElementById('clock');
     if (clockEl) {
@@ -106,10 +133,26 @@ document.addEventListener('DOMContentLoaded', function () {
             lastX = e.clientX;
             lastTime = now;
         });
-        window.addEventListener('mouseup', function () {
+        window.addEventListener('mouseup', function (e) {
             if (!isDragging) return;
             isDragging = false;
             track.classList.remove('is-dragging');
+            // Klick erkennen (kein Drag) → Overlay öffnen
+            var moved = Math.abs(e.clientX - startX);
+            if (moved < 5) {
+                var card = e.target.closest('.c-ticker__card[data-overlay]');
+                if (card) {
+                    var id = 'overlay-' + card.getAttribute('data-overlay');
+                    var overlay = document.getElementById(id);
+                    if (overlay) {
+                        document.querySelectorAll('.c-overlay').forEach(function (o) { o.style.zIndex = '9000'; });
+                        overlay.classList.add('is-visible');
+                        overlay.style.zIndex = '9001';
+                        document.body.style.overflow = 'hidden';
+                        document.body.classList.add('has-overlay');
+                    }
+                }
+            }
         });
 
         // Drag — Touch
@@ -133,6 +176,41 @@ document.addEventListener('DOMContentLoaded', function () {
         track.addEventListener('touchend', function () {
             isDragging = false;
         });
+
+        // Ticker — Projektname oben mittig einblenden
+        var tickerLabel = document.getElementById('ticker-label');
+
+        track.addEventListener('mousemove', function (e) {
+            var card = e.target.closest('.c-ticker__card');
+            if (card && tickerLabel) {
+                var label = card.querySelector('.c-ticker__label');
+                var title = label ? label.textContent.replace('* ', '') : '';
+                if (title) {
+                    tickerLabel.textContent = '✦ ' + title;
+                    tickerLabel.classList.add('is-visible');
+                } else {
+                    tickerLabel.classList.remove('is-visible');
+                }
+            }
+        });
+
+        track.addEventListener('mouseleave', function () {
+            if (tickerLabel) tickerLabel.classList.remove('is-visible');
+        });
+    }
+
+    // About-Bild Scroll-Parallax
+    var aboutImg = document.getElementById('about-image');
+    if (aboutImg) {
+        window.addEventListener('scroll', function () {
+            var rect = aboutImg.getBoundingClientRect();
+            var vh = window.innerHeight;
+            if (rect.top < vh && rect.bottom > 0) {
+                var progress = (vh - rect.top) / (vh + rect.height);
+                var offset = (1 - progress) * 120;
+                aboutImg.style.transform = 'translateY(' + offset + 'px)';
+            }
+        }, { passive: true });
     }
 
     // Scroll-Effekt: Corner-Labels ausblenden wenn Hero nicht sichtbar, Logo bleibt
@@ -354,4 +432,184 @@ document.addEventListener('DOMContentLoaded', function () {
             img.src = original;
         });
     });
+
+    // Showcase — Next-Cursor + Image-Cycling
+    var cursorEl = document.createElement('div');
+    cursorEl.className = 'c-showcase__cursor';
+    cursorEl.textContent = 'Next';
+    document.body.appendChild(cursorEl);
+
+    var showcaseItems = document.querySelectorAll('.js-img-cycle');
+    var cursorVisible = false;
+
+    showcaseItems.forEach(function (item) {
+        var images = item.getAttribute('data-images').split(',');
+        var index = 0;
+        var img = item.querySelector('img');
+
+        item.addEventListener('click', function () {
+            index = (index + 1) % images.length;
+            img.style.opacity = '0';
+            setTimeout(function () {
+                img.src = images[index];
+                img.style.opacity = '1';
+            }, 150);
+        });
+
+        item.addEventListener('mouseenter', function () {
+            cursorVisible = true;
+            cursorEl.style.opacity = '1';
+            var lens = document.getElementById('lens');
+            if (lens) lens.style.opacity = '0';
+        });
+
+        item.addEventListener('mouseleave', function () {
+            cursorVisible = false;
+            cursorEl.style.opacity = '0';
+            var lens = document.getElementById('lens');
+            if (lens) lens.style.opacity = '';
+        });
+    });
+
+    document.addEventListener('mousemove', function (e) {
+        if (cursorVisible) {
+            cursorEl.style.left = e.clientX + 'px';
+            cursorEl.style.top = e.clientY + 'px';
+        }
+    });
+
 });
+
+// Scroll-Reveal — CV Sections einblenden (eigenstaendiger Block)
+(function () {
+    function initReveal() {
+        var revealEls = document.querySelectorAll('.js-reveal');
+        if (!revealEls.length) return;
+
+        if ('IntersectionObserver' in window) {
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    } else if (!entry.target.id) {
+                        // About (#content) bleibt immer sichtbar, Rest wird wieder ausgeblendet
+                        entry.target.classList.remove('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealEls.forEach(function (el) {
+                revealObserver.observe(el);
+            });
+        } else {
+            // Fallback: alles sofort zeigen
+            revealEls.forEach(function (el) {
+                el.classList.add('is-visible');
+            });
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initReveal);
+    } else {
+        initReveal();
+    }
+})();
+
+/* Logo-Scroll: Logo wandert vom Header in den Footer
+   Nutzt capture-phase weil der Scroll nicht auf window passiert */
+window.addEventListener('load', function () {
+    var logo = document.getElementById('main-title');
+    var slot = document.getElementById('footer-logo-slot');
+    var footer = document.querySelector('.c-footer');
+    if (!logo || !slot || !footer) return;
+
+    function getScrollTop(e) {
+        var t = e ? e.target : null;
+        if (t && t !== document && t.scrollTop !== undefined) return t.scrollTop;
+        return document.documentElement.scrollTop || document.body.scrollTop || window.scrollY || 0;
+    }
+
+    function getMaxScroll(e) {
+        var t = e ? e.target : null;
+        if (t && t !== document && t.scrollHeight !== undefined) {
+            return t.scrollHeight - t.clientHeight;
+        }
+        return document.documentElement.scrollHeight - window.innerHeight;
+    }
+
+    function onScroll(e) {
+        var scrollY = getScrollTop(e);
+        var maxScroll = getMaxScroll(e);
+        if (maxScroll <= 0) return;
+
+        // Animation erst ab 60% der Seite starten
+        var startAt = maxScroll * 0.6;
+        var range = maxScroll - startAt;
+
+        if (scrollY < startAt) {
+            logo.style.transform = '';
+            return;
+        }
+
+        var progress = Math.min((scrollY - startAt) / range, 1);
+        // Ease-out
+        progress = 1 - Math.pow(1 - progress, 3);
+
+        // Ziel: wo der Slot im Viewport liegt wenn ganz unten gescrollt
+        var slotRect = slot.getBoundingClientRect();
+        // Bei progress=1 sind wir ganz unten, slotRect ist dann korrekt
+        // Bei progress<1 müssen wir die finale Position vorhersagen
+        // Slot absolute Position auf der Seite:
+        var slotAbsTop = slotRect.top + scrollY;
+        var finalViewportTop = slotAbsTop - maxScroll;
+        var finalViewportLeft = slotRect.left;
+
+        var tx = (finalViewportLeft - 12) * progress;
+        var ty = (finalViewportTop - 16) * progress;
+
+        logo.style.transform = 'translate(' + tx + 'px, ' + ty + 'px)';
+    }
+
+    // Capture phase fängt Scroll auf jedem Element ab
+    document.addEventListener('scroll', onScroll, true);
+});
+
+// CV Sections — scroll-gekoppeltes Einschieben (About bleibt stehen)
+window.addEventListener('load', function () {
+    var all = document.querySelectorAll('.c-cv-section');
+    if (all.length < 2) return;
+
+    // Positionen einmalig cachen (vor jeglichem Transform)
+    var items = [];
+    for (var i = 1; i < all.length; i++) {
+        items.push({ el: all[i], top: all[i].offsetTop });
+    }
+
+    function update() {
+        var scrollY = window.pageYOffset;
+        var windowH = window.innerHeight;
+
+        for (var i = 0; i < items.length; i++) {
+            var elTop = items[i].top - scrollY;
+            var progress = (windowH * 0.65 - elTop) / (windowH * 0.3);
+            if (progress < 0) progress = 0;
+            if (progress > 1) progress = 1;
+
+            items[i].el.style.transform = 'translateY(' + (80 * (1 - progress)) + 'px)';
+        }
+    }
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', function () {
+        for (var i = 0; i < items.length; i++) {
+            items[i].el.style.transform = 'none';
+        }
+        for (var i = 0; i < items.length; i++) {
+            items[i].top = items[i].el.offsetTop;
+        }
+        update();
+    });
+});
+

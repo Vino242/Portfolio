@@ -18,6 +18,9 @@
         <img src="assets/logoneu.png" alt="Vincent Mark Logo" class="c-logo__img">
     </div>
 
+    <!-- Ticker Hover Label oben mittig -->
+    <span class="c-ticker-label" id="ticker-label"></span>
+
     <!-- Corner Labels -->
     <span class="c-corner c-corner--tr" id="clock"></span>
     <span class="c-corner c-corner--bl">Design & AI Development</span>
@@ -35,8 +38,8 @@
         <div class="c-slide-menu__footer">
             <button class="c-lang-btn" id="lang-toggle">EN</button>
             <div class="c-slide-menu__social">
-                <a href="https://www.instagram.com/vincentnoelmark?igsh=dDgzZGZoaTJmdDUw&utm_source=qr" target="_blank">Instagram</a>
-                <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+                <a href="https://www.instagram.com/vincentnoelmark?igsh=dDgzZGZoaTJmdDUw&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </div>
         </div>
     </div>
@@ -45,72 +48,163 @@
     <main class="c-hero c-hero--ticker">
         <div class="c-ticker">
             <ul class="c-ticker__track">
-                <li class="c-ticker__card"><img src="assets/Congressus/_DSF9345.jpg" alt="Congressus"></li>
-                <li class="c-ticker__card"><img src="assets/gifs/2.gif" alt="Animation"></li>
-                <li class="c-ticker__card"><img src="assets/Odenwald/Bild1.jpeg" alt="Odenwald"></li>
-                <li class="c-ticker__card"><img src="assets/Montepulciano/Bildmonte3.jpeg" alt="Montepulciano"></li>
-                <li class="c-ticker__card"><img src="assets/gifs/3.gif" alt="Animation"></li>
-                <li class="c-ticker__card"><img src="assets/Illustrationen/Plakat2.jpg" alt="Illustrationen"></li>
-                <li class="c-ticker__card"><img src="assets/gifs/generated_animation.gif" alt="Animation"></li>
-                <li class="c-ticker__card"><img src="assets/Athen/db5cfc4c-2832-4611-9b34-a645914e3279_rw_1920.jpg" alt="Athen"></li>
-                <li class="c-ticker__card"><img src="assets/gifs/4.gif" alt="Animation"></li>
+                <li class="c-ticker__card" data-overlay="congressus" data-title="Congressus"><img src="assets/Congressus/_DSF9345.jpg" alt="Congressus"><span class="c-ticker__label">* Congressus</span></li>
+                <li class="c-ticker__card"><img src="assets/gifs/2.gif" alt="Experimente"><span class="c-ticker__label">* Experimente</span></li>
+                <li class="c-ticker__card" data-overlay="odenwald" data-title="Odenwald"><img src="assets/Odenwald/Bild1.jpeg" alt="Odenwald"><span class="c-ticker__label">* Odenwald</span></li>
+                <li class="c-ticker__card" data-overlay="montepulciano" data-title="Montepulciano"><img src="assets/Montepulciano/Bildmonte3.jpeg" alt="Montepulciano"><span class="c-ticker__label">* Montepulciano</span></li>
+                <li class="c-ticker__card"><img src="assets/gifs/3.gif" alt="Experimente"><span class="c-ticker__label">* Experimente</span></li>
+                <li class="c-ticker__card" data-overlay="illustrationen" data-title="Illustrationen"><img src="assets/Illustrationen/Plakat2.jpg" alt="Illustrationen"><span class="c-ticker__label">* Illustrationen</span></li>
+                <li class="c-ticker__card"><img src="assets/gifs/generated_animation.gif" alt="Experimente"><span class="c-ticker__label">* Experimente</span></li>
+                <li class="c-ticker__card" data-overlay="athen" data-title="Athen"><img src="assets/Athen/db5cfc4c-2832-4611-9b34-a645914e3279_rw_1920.jpg" alt="Athen"><span class="c-ticker__label">* Athen</span></li>
+                <li class="c-ticker__card"><img src="assets/gifs/4.gif" alt="Experimente"><span class="c-ticker__label">* Experimente</span></li>
                 <!-- Duplikat für nahtlose Schleife -->
-                <li class="c-ticker__card" aria-hidden="true"><img src="assets/Congressus/_DSF9345.jpg" alt=""></li>
+                <li class="c-ticker__card" aria-hidden="true" data-overlay="congressus"><img src="assets/Congressus/_DSF9345.jpg" alt=""><span class="c-ticker__label">* Congressus</span></li>
                 <li class="c-ticker__card" aria-hidden="true"><img src="assets/gifs/2.gif" alt=""></li>
-                <li class="c-ticker__card" aria-hidden="true"><img src="assets/Odenwald/Bild1.jpeg" alt=""></li>
-                <li class="c-ticker__card" aria-hidden="true"><img src="assets/Montepulciano/Bildmonte3.jpeg" alt=""></li>
+                <li class="c-ticker__card" aria-hidden="true" data-overlay="odenwald"><img src="assets/Odenwald/Bild1.jpeg" alt=""><span class="c-ticker__label">* Odenwald</span></li>
+                <li class="c-ticker__card" aria-hidden="true" data-overlay="montepulciano"><img src="assets/Montepulciano/Bildmonte3.jpeg" alt=""><span class="c-ticker__label">* Montepulciano</span></li>
                 <li class="c-ticker__card" aria-hidden="true"><img src="assets/gifs/3.gif" alt=""></li>
-                <li class="c-ticker__card" aria-hidden="true"><img src="assets/Illustrationen/Plakat2.jpg" alt=""></li>
+                <li class="c-ticker__card" aria-hidden="true" data-overlay="illustrationen"><img src="assets/Illustrationen/Plakat2.jpg" alt=""><span class="c-ticker__label">* Illustrationen</span></li>
                 <li class="c-ticker__card" aria-hidden="true"><img src="assets/gifs/generated_animation.gif" alt=""></li>
-                <li class="c-ticker__card" aria-hidden="true"><img src="assets/Athen/db5cfc4c-2832-4611-9b34-a645914e3279_rw_1920.jpg" alt=""></li>
+                <li class="c-ticker__card" aria-hidden="true" data-overlay="athen"><img src="assets/Athen/db5cfc4c-2832-4611-9b34-a645914e3279_rw_1920.jpg" alt=""><span class="c-ticker__label">* Athen</span></li>
                 <li class="c-ticker__card" aria-hidden="true"><img src="assets/gifs/4.gif" alt=""></li>
             </ul>
         </div>
     </main>
 
-    <!-- Über mich -->
-    <section id="content" class="c-about">
-        <div class="c-about__inner">
-            <h2 class="c-about__heading">Über mich</h2>
-            <p class="c-about__text">
-                Ich bin Vincent Noel Mark, 28, Diplom-Kommunikationsdesigner mit Schwerpunkt UI Design.
-            </p>
-            <p class="c-about__text">
-                Ich entwickle klare, funktionale Interfaces mit Fokus auf Struktur, Typografie und visuelle Präzision. Mein Ansatz ist konzeptionell und reduziert – verstehen, analysieren, gestalten.
-            </p>
-            <p class="c-about__text">
-                Neben digitalem Design arbeite ich fotografisch und künstlerisch. Mich interessieren Bildkomposition, Licht und die Spannung zwischen Ruhe und Ausdruck.
-            </p>
-            <p class="c-about__text">
-                Gute Gestaltung entsteht für mich aus Klarheit, Haltung und einem bewussten Umgang mit Form und Inhalt.
-            </p>
+
+    <!-- ═══════════════════════════════════════════
+         ABOUT PAGE — Full-Screen CV Sections
+         Jede Section baut sich beim Scrollen auf
+         ═══════════════════════════════════════════ -->
+
+    <!-- 1. About -->
+    <section id="content" class="c-cv-section js-reveal">
+        <div class="c-cv-section__inner">
+            <span class="c-cv-section__label">About</span>
+            <div class="c-cv-section__content">
+                <p class="c-cv-section__text">
+                    Ich bin Vincent Noel Mark, 28, Diplom-Kommunikationsdesigner mit Schwerpunkt UI Design.
+                </p>
+                <p class="c-cv-section__text">
+                    Ich entwickle klare, funktionale Interfaces mit Fokus auf Struktur, Typografie und visuelle Präzision. Mein Ansatz ist konzeptionell und reduziert — verstehen, analysieren, gestalten.
+                </p>
+                <p class="c-cv-section__text">
+                    Neben digitalem Design arbeite ich fotografisch und künstlerisch. Mich interessieren Bildkomposition, Licht und die Spannung zwischen Ruhe und Ausdruck.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Portrait -->
+    <section class="c-cv-section c-cv-section--portrait js-reveal">
+        <div class="c-cv-section__portrait">
+            <img src="assets/por.jpeg" alt="Vincent Noel Mark">
+        </div>
+    </section>
+
+    <!-- 3. Work -->
+    <section class="c-cv-section js-reveal">
+        <div class="c-cv-section__inner">
+            <span class="c-cv-section__label">Work</span>
+            <div class="c-cv-section__content">
+                <div class="c-cv-row">
+                    <span class="c-cv-row__name">Freelance</span>
+                    <span class="c-cv-row__role">Designer</span>
+                    <span class="c-cv-row__dot"></span>
+                    <span class="c-cv-row__year">2024—</span>
+                </div>
+                <div class="c-cv-row">
+                    <span class="c-cv-row__name">Agentur XY</span>
+                    <span class="c-cv-row__role">UI/UX Designer</span>
+                    <span class="c-cv-row__dot"></span>
+                    <span class="c-cv-row__year">2022—24</span>
+                </div>
+                <div class="c-cv-row">
+                    <span class="c-cv-row__name">Hochschule Darmstadt</span>
+                    <span class="c-cv-row__role">Kommunikationsdesign</span>
+                    <span class="c-cv-row__dot"></span>
+                    <span class="c-cv-row__year">2018—22</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Contact -->
+    <section class="c-cv-section js-reveal">
+        <div class="c-cv-section__inner">
+            <span class="c-cv-section__label">Contact</span>
+            <div class="c-cv-section__content">
+                <a href="mailto:vincent.mark@gmx.de" class="c-cv-row c-cv-row--link">
+                    <span class="c-cv-row__name">vincent.mark@gmx.de</span>
+                    <span class="c-cv-row__dot"></span>
+                    <span class="c-cv-row__action">Mail ↗</span>
+                </a>
+                <a href="https://www.instagram.com/vincentnoelmark" target="_blank" rel="noopener noreferrer" class="c-cv-row c-cv-row--link">
+                    <span class="c-cv-row__name">Instagram</span>
+                    <span class="c-cv-row__dot"></span>
+                    <span class="c-cv-row__action">Follow ↗</span>
+                </a>
+                <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" class="c-cv-row c-cv-row--link">
+                    <span class="c-cv-row__name">Twitter / X</span>
+                    <span class="c-cv-row__dot"></span>
+                    <span class="c-cv-row__action">Follow ↗</span>
+                </a>
+                <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="c-cv-row c-cv-row--link">
+                    <span class="c-cv-row__name">LinkedIn</span>
+                    <span class="c-cv-row__dot"></span>
+                    <span class="c-cv-row__action">Follow ↗</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Where -->
+    <section class="c-cv-section js-reveal">
+        <div class="c-cv-section__inner">
+            <span class="c-cv-section__label">Where</span>
+            <div class="c-cv-section__content">
+                <div class="c-cv-row">
+                    <span class="c-cv-row__name">Frankfurt am Main</span>
+                    <span class="c-cv-row__dot"></span>
+                    <span class="c-cv-row__role">Deutschland</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Extras -->
+    <section class="c-cv-section js-reveal">
+        <div class="c-cv-section__inner">
+            <span class="c-cv-section__label">Extras</span>
+            <div class="c-cv-section__content">
+                <a href="#" class="c-cv-row c-cv-row--link">
+                    <span class="c-cv-row__name">Resume (PDF)</span>
+                    <span class="c-cv-row__dot"></span>
+                    <span class="c-cv-row__action">Download ↗</span>
+                </a>
+                <a href="#" class="c-cv-row c-cv-row--link">
+                    <span class="c-cv-row__name">Portfolio-Bucket</span>
+                    <span class="c-cv-row__dot"></span>
+                    <span class="c-cv-row__action">Link ↗</span>
+                </a>
+            </div>
         </div>
     </section>
 
     <footer class="c-footer">
         <div class="c-footer__inner">
-            <div class="c-footer__col">
-                <strong>VINCENT NOEL MARK</strong>
-                <p data-i18n="footer.designerTitle">Diplom Designer</p>
-                <p>Darmstadt</p>
+            <div class="c-footer__left">
+                <span class="c-footer__logo-slot" id="footer-logo-slot"></span>
+                <nav class="c-footer__links">
+                    <a href="https://www.instagram.com/vincentnoelmark" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="#" data-i18n="footer.datenschutz">Datenschutz</a>
+                    <a href="#" data-overlay="impressum">Impressum</a>
+                </nav>
             </div>
-            <div class="c-footer__col">
-                <strong data-i18n="footer.kontakt">KONTAKT</strong>
-                <p>vincent.mark@gmx.de</p>
-                <p>+49 151 10657966</p>
+            <div class="c-footer__right">
+                <span>© 2026 Vincent Noel Mark. All Rights Reserved.</span>
             </div>
-            <div class="c-footer__col">
-                <strong>LINKS</strong>
-                <a href="https://www.instagram.com/vincentnoelmark?igsh=dDgzZGZoaTJmdDUw&utm_source=qr" target="_blank">Instagram</a>
-            </div>
-            <div class="c-footer__col">
-                <strong data-i18n="footer.rechtliches">RECHTLICHES</strong>
-                <a href="#" data-overlay="impressum">Impressum</a>
-                <a href="#" data-i18n="footer.datenschutz">Datenschutz</a>
-            </div>
-        </div>
-        <div class="c-footer__bottom">
-            <span>© 2026 Vincent Noel Mark</span>
         </div>
     </footer>
 
@@ -466,7 +560,20 @@
         <button class="c-overlay__close" data-close="overlay-impressum"><span data-i18n="btn.zurueck">← zurück</span></button>
     </div>
 
+    <!-- Lupen-Cursor -->
+    <div class="c-lens" id="lens"></div>
+
     <script src="script.js"></script>
+    <script>
+    (function(){
+        var l=document.getElementById('lens');
+        if(!l)return;
+        var mx=0,my=0,lx=0,ly=0;
+        document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;l.style.opacity='1';});
+        document.addEventListener('mouseleave',function(){l.style.opacity='0';});
+        (function loop(){lx+=(mx-lx)*0.15;ly+=(my-ly)*0.15;l.style.left=lx+'px';l.style.top=ly+'px';requestAnimationFrame(loop);})();
+    })();
+    </script>
 
 </body>
 </html>
