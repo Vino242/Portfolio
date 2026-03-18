@@ -213,18 +213,36 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { passive: true });
     }
 
-    // Scroll-Effekt: Corner-Labels ausblenden wenn Hero nicht sichtbar, Logo bleibt
+    // Scroll-Effekt: Corner-Labels + Logo (mobile) ausblenden zwischen Hero und Footer
     var corners = document.querySelectorAll('.c-corner');
     var hero = document.querySelector('.c-hero');
+    var logo = document.getElementById('main-title');
+    var footer = document.querySelector('.c-footer');
+    var isMobile = window.innerWidth <= 900;
+
     if (hero && corners.length) {
-        var isMobile = window.innerWidth <= 900;
         var heroObs = new IntersectionObserver(function (entries) {
             var visible = entries[0].isIntersecting;
             corners.forEach(function (c) {
                 c.style.opacity = visible ? '1' : '0';
             });
+            if (isMobile && logo) {
+                logo.style.opacity = visible ? '1' : '0';
+                logo.style.transition = 'opacity 0.3s ease';
+            }
         }, { threshold: isMobile ? 0.3 : 0.85 });
         heroObs.observe(hero);
+
+        // Mobile: Logo-Kopie im Footer anzeigen
+        if (isMobile && logo && footer) {
+            var slot = document.getElementById('footer-logo-slot');
+            if (slot) {
+                var footerLogo = logo.querySelector('img').cloneNode(true);
+                footerLogo.style.height = '36px';
+                footerLogo.style.width = 'auto';
+                slot.appendChild(footerLogo);
+            }
+        }
     }
 
     // Burger-Menü Toggle + iPhone theme-color
